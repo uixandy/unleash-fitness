@@ -19,8 +19,8 @@ export default function ProductProof() {
             <span className="text-orange">Not the feed.</span>
           </h2>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
-            Production screens from UNLEASH — dark, spare, and serious about logging.
-            No vanity dashboards.
+            Production screens from UNLEASH — workouts, recipes, meal planner, and plans.
+            Dark, spare, no vanity dashboards.
           </p>
         </div>
 

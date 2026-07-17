@@ -11,20 +11,28 @@ const BANDS = [
     align: 'left',
   },
   {
-    key: 'nutrition',
-    eyebrow: '02 — Nutrition',
-    title: 'Macros where the training lives.',
-    body: 'Goals, recipes, meal planner — one app between the rack and the kitchen. AI import lands with Pro; manual tracking ships at launch.',
-    shot: { key: 'nutrition', label: 'Nutrition', src: '/screenshots/nutrition.png' },
+    key: 'recipes',
+    eyebrow: '02 — Recipes',
+    title: 'Your kitchen, logged like a session.',
+    body: 'Save recipes with ingredients, steps, and macros. Build a library you actually cook from — not a graveyard of screenshots. Manual entry at launch; AI import from URL or photo lands with Pro.',
+    shot: { key: 'recipes', label: 'Recipes', src: '/screenshots/nutrition-recipes.png' },
     align: 'right',
   },
   {
+    key: 'planner',
+    eyebrow: '03 — Meal planner',
+    title: 'Plan the week. Hit the macros.',
+    body: 'Drop recipes into a meal planner so training days and kitchen days stay in sync. See protein, carbs, and fat against your goals before you shop — not after you guess.',
+    shot: { key: 'planner', label: 'Meal planner', src: '/screenshots/nutrition-planner.png' },
+    align: 'left',
+  },
+  {
     key: 'plans',
-    eyebrow: '03 — Programming',
+    eyebrow: '04 — Programming',
     title: 'Save the plan. Run it again.',
     body: 'Build once, start fast, edit on the fly. Prefill from last session. Progressive overload hints when you’re ready to move weight.',
     shot: { key: 'plans', label: 'Plans', src: '/screenshots/plans.png' },
-    align: 'left',
+    align: 'right',
   },
 ]
 
@@ -65,9 +73,13 @@ export default function Features() {
         <div className="reveal-up features-head mb-16 sm:mb-24">
           <p className="section-label">Features</p>
           <h2 className="display-title max-w-3xl">
-            Everything that matters
-            <span className="text-orange"> between sets.</span>
+            Floor to kitchen.
+            <span className="text-orange"> One tracker.</span>
           </h2>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+            Logging is only half the job. Recipes and a meal planner live next to your
+            sessions — so “Eat” in Train · Eat · Progress isn’t an afterthought.
+          </p>
         </div>
 
         <div className="feature-bands">
@@ -79,26 +91,22 @@ export default function Features() {
         <div className="feature-aside reveal-up mt-20 sm:mt-28">
           <div className="feature-aside-phones">
             <PhoneFrame
-              shot={{ key: 'library', label: 'Library', src: '/screenshots/library.png' }}
+              shot={{ key: 'nutrition', label: 'Nutrition goals', src: '/screenshots/nutrition.png' }}
               size="sm"
             />
             <PhoneFrame
-              shot={{
-                key: 'planner',
-                label: 'Planner',
-                src: '/screenshots/nutrition-planner.png',
-              }}
+              shot={{ key: 'library', label: 'Library', src: '/screenshots/library.png' }}
               size="sm"
             />
           </div>
           <div>
             <p className="section-label">Also in the build</p>
             <h3 className="font-display text-2xl sm:text-3xl leading-tight">
-              Library. Planner. PWA.
+              Macro goals. Exercise library. PWA.
             </h3>
             <p className="mt-3 text-[var(--text-secondary)] leading-relaxed max-w-md">
-              Machine-first exercise library, meal planner, install-to-home-screen.
-              Spare design — orange when it matters, nothing competing with the work.
+              Set calorie and macro targets, browse a machine-first library, install to
+              home screen. Spare design — orange when it matters.
             </p>
           </div>
         </div>

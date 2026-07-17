@@ -56,8 +56,8 @@ export default function Hero({ theme, onSetTheme }) {
           </h1>
           <div className="hero-rule anim-fade-up-delay-1" aria-hidden="true" />
           <p className="hero-lede anim-fade-up-delay-2">
-            A workout tracker for people who actually lift — sessions, nutrition, and
-            charts without the fluff. Join the waitlist for launch and Pro.
+            A workout tracker for people who actually lift — sessions, recipes, meal
+            planning, and charts without the fluff. Join the waitlist for launch and Pro.
           </p>
 
           <div className="hero-cta-panel anim-fade-up-delay-2">

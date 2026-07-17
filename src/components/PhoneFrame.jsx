@@ -14,7 +14,7 @@ const SHOTS = [
   {
     key: 'nutrition',
     label: 'Nutrition',
-    caption: 'Macro goals and meal tracking in the same app as your training.',
+    caption: 'Recipes, meal planner, and macro goals — kitchen tracking next to the rack.',
     src: '/screenshots/nutrition.png',
   },
   {

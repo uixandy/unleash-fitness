@@ -38,8 +38,9 @@ export default function ProTeaser() {
             <span className="pro-epic-title-accent">Pro goes further.</span>
           </h2>
           <p className="pro-epic-lede">
-            Advanced programming stays free. Pro unlocks library breadth, longer analytics,
-            and AI. Price isn’t set — get on the list first.
+            Advanced programming stays free — including manual recipes and meal planning.
+            Pro unlocks library breadth, longer analytics, and AI recipe import. Price isn’t
+            set — get on the list first.
           </p>
         </header>
 
