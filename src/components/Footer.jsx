@@ -1,17 +1,27 @@
-export default function Footer() {
+import ThemeToggle from './ThemeToggle'
+
+export default function Footer({ theme, onSetTheme, resolvedTheme = 'dark' }) {
+  const logo =
+    resolvedTheme === 'light'
+      ? '/assets/unleash-logo-light.svg'
+      : '/assets/unleash-logo-dark.svg'
+
   return (
     <footer className="border-t border-[var(--border)] px-5 sm:px-8 py-14 sm:py-16">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           <div className="lg:col-span-5">
-            <img src="/assets/unleash-logo-dark.svg" alt="UNLEASH" className="h-8 w-auto" />
+            <img src={logo} alt="UNLEASH" className="h-8 w-auto" />
             <p className="mt-4 text-sm text-[var(--text-secondary)] max-w-sm leading-relaxed">
               Workout tracking for people who train. Waitlist open for launch and Pro.
             </p>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap items-center gap-3">
               <a href="#hero-waitlist" className="btn-primary text-sm">
                 Join waitlist
               </a>
+              {theme && onSetTheme ? (
+                <ThemeToggle theme={theme} onSetTheme={onSetTheme} />
+              ) : null}
             </div>
           </div>
 

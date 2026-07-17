@@ -4,8 +4,10 @@ import Features from './components/Features'
 import ProTeaser from './components/ProTeaser'
 import ClosingBand from './components/ClosingBand'
 import Footer from './components/Footer'
+import { useTheme } from './hooks/useTheme'
 
 export default function App() {
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const path = typeof window !== 'undefined' ? window.location.pathname : '/'
 
   if (path === '/privacy') {
@@ -26,19 +28,19 @@ export default function App() {
             Supabase Auth. This marketing site only collects waitlist emails you submit.
           </p>
         </main>
-        <Footer />
+        <Footer theme={theme} onSetTheme={setTheme} resolvedTheme={resolvedTheme} />
       </>
     )
   }
 
   return (
     <>
-      <Hero />
+      <Hero theme={theme} onSetTheme={setTheme} />
       <ProductProof />
       <Features />
       <ProTeaser />
       <ClosingBand />
-      <Footer />
+      <Footer theme={theme} onSetTheme={setTheme} resolvedTheme={resolvedTheme} />
     </>
   )
 }

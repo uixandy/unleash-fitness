@@ -22,7 +22,7 @@ export default function ProTeaser() {
   const { ref, className } = useReveal()
 
   return (
-    <section id="pro" className={`pro-epic ${className}`} ref={ref}>
+    <section id="pro" className={`pro-epic theme-locked-dark ${className}`} ref={ref}>
       <div className="pro-epic-stage" aria-hidden="true">
         <img src="/images/lifestyle-barbell.jpg" alt="" className="pro-epic-img" />
         <div className="pro-epic-shade" />

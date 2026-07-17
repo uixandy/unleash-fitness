@@ -1,5 +1,6 @@
 import WaitlistForm from './WaitlistForm'
 import PhoneFrame from './PhoneFrame'
+import ThemeToggle from './ThemeToggle'
 
 const HERO_PHONE = {
   key: 'workout',
@@ -7,9 +8,9 @@ const HERO_PHONE = {
   src: '/screenshots/workout.png',
 }
 
-export default function Hero() {
+export default function Hero({ theme, onSetTheme }) {
   return (
-    <section className="hero cinematic-hero">
+    <section className="hero cinematic-hero theme-locked-dark">
       <div className="hero-stage" aria-hidden="true">
         <img src="/images/hero-gym.jpg" alt="" className="hero-stage-img" />
         <div className="hero-stage-shade" />
@@ -36,9 +37,12 @@ export default function Hero() {
             Pro
           </a>
         </nav>
-        <a href="#hero-waitlist" className="btn-outline text-sm shrink-0">
-          Join waitlist
-        </a>
+        <div className="hero-top-actions">
+          <ThemeToggle theme={theme} onSetTheme={onSetTheme} className="theme-toggle--compact" />
+          <a href="#hero-waitlist" className="btn-outline text-sm shrink-0">
+            Join waitlist
+          </a>
+        </div>
       </header>
 
       <div className="hero-body">

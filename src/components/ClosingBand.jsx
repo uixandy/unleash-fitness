@@ -5,7 +5,7 @@ export default function ClosingBand() {
   const { ref, className } = useReveal()
 
   return (
-    <section className={`closing-cinematic ${className}`} ref={ref}>
+    <section className={`closing-cinematic theme-locked-dark ${className}`} ref={ref}>
       <div className="closing-stage" aria-hidden="true">
         <img src="/images/stock-gym.jpg" alt="" className="closing-stage-img" />
         <div className="closing-stage-shade" />
