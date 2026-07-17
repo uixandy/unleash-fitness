@@ -35,7 +35,7 @@ export default function App() {
 
   return (
     <>
-      <Hero theme={theme} onSetTheme={setTheme} />
+      <Hero theme={theme} resolvedTheme={resolvedTheme} onSetTheme={setTheme} />
       <ProductProof />
       <Features />
       <ProTeaser />

@@ -20,7 +20,11 @@ export default function Footer({ theme, onSetTheme, resolvedTheme = 'dark' }) {
                 Join waitlist
               </a>
               {theme && onSetTheme ? (
-                <ThemeToggle theme={theme} onSetTheme={onSetTheme} />
+                <ThemeToggle
+                  theme={theme}
+                  resolvedTheme={resolvedTheme}
+                  onSetTheme={onSetTheme}
+                />
               ) : null}
             </div>
           </div>

@@ -10,8 +10,8 @@ function resolveTheme(theme) {
 
 export function useTheme() {
   const [theme, setThemeState] = useState(() => {
-    if (typeof window === 'undefined') return 'dark'
-    return localStorage.getItem(STORAGE_KEY) || 'dark'
+    if (typeof window === 'undefined') return 'device'
+    return localStorage.getItem(STORAGE_KEY) || 'device'
   })
   const [resolvedTheme, setResolvedTheme] = useState(() => resolveTheme(theme))
 

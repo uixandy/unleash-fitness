@@ -38,7 +38,12 @@ export default function Hero({ theme, onSetTheme }) {
           </a>
         </nav>
         <div className="hero-top-actions">
-          <ThemeToggle theme={theme} onSetTheme={onSetTheme} className="theme-toggle--compact" />
+          <ThemeToggle
+            theme={theme}
+            resolvedTheme={resolvedTheme}
+            onSetTheme={onSetTheme}
+            className="theme-toggle--compact"
+          />
           <a href="#hero-waitlist" className="btn-outline text-sm shrink-0">
             Join waitlist
           </a>
