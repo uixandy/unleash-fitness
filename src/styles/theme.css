@@ -758,10 +758,6 @@ h1, h2, h3 {
   border-top: 1px solid var(--border);
 }
 
-.features-intro {
-  /* section-stage + clip — same watermark containing block as Product */
-}
-
 .features-intro-inner {
   padding-top: 5rem;
   padding-bottom: 3rem;
