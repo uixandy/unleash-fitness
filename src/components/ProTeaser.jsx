@@ -14,7 +14,7 @@ const PRO = [
   'Unlimited plans & custom exercises',
   '90-day / all-time analytics',
   'AI recipe import (URL + photo)',
-  'AI Coach (when ready)',
+  'AI Coach',
   'Health app export',
 ]
 
