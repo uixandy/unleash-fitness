@@ -119,13 +119,16 @@ function useRailProgress(enabled) {
       const el = trackRef.current
       if (!el) return
       const rect = el.getBoundingClientRect()
+      // Match sticky phone `top: 88px` — fill begins the moment the track locks in,
+      // not after the section top has already scrolled off-screen.
+      const startAt = 88
       const travel = rect.height - window.innerHeight
       if (travel <= 0) {
-        setProgress(rect.bottom <= window.innerHeight ? 100 : 0)
+        setProgress(rect.top <= startAt ? 100 : 0)
         return
       }
-      const scrolled = Math.min(travel, Math.max(0, -rect.top))
-      setProgress((scrolled / travel) * 100)
+      const scrolled = startAt - rect.top
+      setProgress(Math.min(100, Math.max(0, (scrolled / travel) * 100)))
     }
 
     update()
