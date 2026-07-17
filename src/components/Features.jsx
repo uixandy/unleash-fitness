@@ -117,7 +117,7 @@ export default function Features() {
       <SectionWatermark position="features">FEATURES</SectionWatermark>
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
-        <div className="reveal-up features-head mb-12 sm:mb-16">
+        <div className="reveal-up features-head">
           <p className="section-label">Features</p>
           <h2 className="display-title max-w-3xl">
             Floor to kitchen.

@@ -12,9 +12,9 @@
   --glass-bg: rgba(8, 14, 12, 0.55);
   --glass-border: rgba(36, 56, 48, 0.85);
   --aside-bg: linear-gradient(135deg, rgba(13, 22, 18, 0.9), rgba(8, 14, 12, 0.6));
-  --watermark-stroke: rgba(240, 240, 238, 0.14);
-  --watermark-glow: rgba(255, 90, 31, 0.12);
-  --stage-glow: rgba(255, 90, 31, 0.12);
+  --watermark-stroke: rgba(240, 240, 238, 0.08);
+  --watermark-glow: rgba(255, 90, 31, 0.05);
+  --stage-glow: rgba(255, 90, 31, 0.08);
 }
 
 [data-theme="light"] {
@@ -31,9 +31,9 @@
   --glass-bg: rgba(255, 255, 255, 0.78);
   --glass-border: rgba(221, 221, 214, 0.95);
   --aside-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(234, 234, 228, 0.85));
-  --watermark-stroke: rgba(13, 22, 18, 0.12);
-  --watermark-glow: rgba(232, 78, 23, 0.08);
-  --stage-glow: rgba(232, 78, 23, 0.1);
+  --watermark-stroke: rgba(13, 22, 18, 0.08);
+  --watermark-glow: rgba(232, 78, 23, 0.04);
+  --stage-glow: rgba(232, 78, 23, 0.07);
 }
 
 @media (prefers-color-scheme: light) {
@@ -51,9 +51,9 @@
     --glass-bg: rgba(255, 255, 255, 0.78);
     --glass-border: rgba(221, 221, 214, 0.95);
     --aside-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(234, 234, 228, 0.85));
-    --watermark-stroke: rgba(13, 22, 18, 0.12);
-    --watermark-glow: rgba(232, 78, 23, 0.08);
-    --stage-glow: rgba(232, 78, 23, 0.1);
+    --watermark-stroke: rgba(13, 22, 18, 0.08);
+    --watermark-glow: rgba(232, 78, 23, 0.04);
+    --stage-glow: rgba(232, 78, 23, 0.07);
   }
 }
 
@@ -70,9 +70,9 @@
   --text-muted: #4E7870;
   --glass-bg: rgba(8, 14, 12, 0.55);
   --glass-border: rgba(36, 56, 48, 0.85);
-  --watermark-stroke: rgba(240, 240, 238, 0.16);
-  --watermark-glow: rgba(255, 90, 31, 0.14);
-  --stage-glow: rgba(255, 90, 31, 0.14);
+  --watermark-stroke: rgba(240, 240, 238, 0.09);
+  --watermark-glow: rgba(255, 90, 31, 0.06);
+  --stage-glow: rgba(255, 90, 31, 0.1);
   color: var(--text-primary);
 }
 
@@ -669,47 +669,52 @@ h1, h2, h3 {
 /* ── Shared section stage + watermark ── */
 .section-stage {
   position: relative;
-  overflow: hidden;
   background:
-    radial-gradient(ellipse 70% 45% at 70% 0%, var(--stage-glow), transparent 58%),
+    radial-gradient(ellipse 65% 40% at 75% 0%, var(--stage-glow), transparent 60%),
     linear-gradient(180deg, var(--stage-mid) 0%, var(--bg-primary) 42%, var(--stage-mid) 100%);
   border-top: 1px solid var(--border);
+}
+/* Clip only when sticky children are NOT required */
+.section-stage--clip {
+  overflow: hidden;
 }
 
 .section-watermark {
   position: absolute;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  font-size: clamp(4.5rem, 16vw, 12rem);
+  font-size: clamp(4rem, 14vw, 10rem);
   letter-spacing: -0.06em;
   line-height: 0.85;
   color: transparent;
   -webkit-text-stroke: 1px var(--watermark-stroke);
-  text-shadow: 0 0 28px var(--watermark-glow);
+  text-shadow: 0 0 18px var(--watermark-glow);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  opacity: 0.85;
+  opacity: 0.55;
   z-index: 0;
 }
 .section-watermark--top {
-  top: 7%;
+  top: 8%;
   left: 50%;
   translate: -50% 0;
 }
 .section-watermark--right {
-  top: 12%;
+  top: 14%;
   right: -2%;
   left: auto;
   translate: 0 0;
-  font-size: clamp(5rem, 20vw, 16rem);
-  opacity: 0.7;
+  font-size: clamp(4.5rem, 18vw, 13rem);
+  opacity: 0.45;
 }
 .section-watermark--features {
-  top: 4%;
-  left: 50%;
-  translate: -50% 0;
-  font-size: clamp(4rem, 14vw, 11rem);
+  top: 1.5rem;
+  right: 0;
+  left: auto;
+  translate: 0 0;
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  opacity: 0.4;
 }
 
 /* ── Product constellation ── */
@@ -772,6 +777,10 @@ h1, h2, h3 {
   position: sticky;
   top: 88px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
 }
 
 .features-phone-card {
@@ -779,13 +788,12 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 .features-phone-swap {
   position: relative;
   z-index: 1;
-  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .features-scroll-dots {
@@ -820,19 +828,26 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
 }
+
 .features-step {
-  min-height: 70vh;
+  min-height: calc(100vh - 140px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 2rem 0;
-  opacity: 0.3;
-  transform: translateY(10px);
+  opacity: 0.32;
+  transform: translateY(8px);
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 .features-step.is-active {
   opacity: 1;
   transform: none;
+}
+
+.features-head {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2rem;
 }
 
 .features-stack {

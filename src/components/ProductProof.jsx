@@ -6,7 +6,7 @@ export default function ProductProof() {
   const { ref, className } = useReveal()
 
   return (
-    <section id="product" className={`product-stage section-stage section-pad ${className}`} ref={ref}>
+    <section id="product" className={`product-stage section-stage section-stage--clip section-pad ${className}`} ref={ref}>
       <SectionWatermark>PRODUCT</SectionWatermark>
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
