@@ -6,7 +6,6 @@ import useReveal from '../hooks/useReveal'
 const STEPS = [
   {
     key: 'workout',
-    mark: 'LOGGING',
     eyebrow: '01 — Logging',
     title: 'Every set. Every rep. No friction.',
     body: 'Plans, free log, supersets, rest timers, drafts that survive tab switches. Advanced programming stays free — because the floor doesn’t wait for a paywall.',
@@ -14,7 +13,6 @@ const STEPS = [
   },
   {
     key: 'recipes',
-    mark: 'RECIPES',
     eyebrow: '02 — Recipes',
     title: 'Your kitchen, logged like a session.',
     body: 'Save recipes with ingredients, steps, and macros. Build a library you actually cook from — not a graveyard of screenshots. Manual entry at launch; AI import from URL or photo lands with Pro.',
@@ -22,7 +20,6 @@ const STEPS = [
   },
   {
     key: 'planner',
-    mark: 'PLANNER',
     eyebrow: '03 — Meal planner',
     title: 'Plan the week. Hit the macros.',
     body: 'Drop recipes into a meal planner so training days and kitchen days stay in sync. See protein, carbs, and fat against your goals before you shop — not after you guess.',
@@ -30,7 +27,6 @@ const STEPS = [
   },
   {
     key: 'plans',
-    mark: 'PLANS',
     eyebrow: '04 — Programming',
     title: 'Save the plan. Run it again.',
     body: 'Build once, start fast, edit on the fly. Prefill from last session. Progressive overload hints when you’re ready to move weight.',
@@ -114,7 +110,7 @@ export default function Features() {
   const { ref, className } = useReveal()
   const sticky = useDesktopSticky()
   const { active, setStepRef, scrollToStep } = useActiveStep(sticky, STEPS.length)
-  const activeShot = STEPS[active].shot
+  const progress = ((active + 1) / STEPS.length) * 100
 
   return (
     <section id="features" className={`features-cinematic ${className}`} ref={ref}>
@@ -138,18 +134,32 @@ export default function Features() {
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 features-body">
         {sticky ? (
-          <div className="features-scroll">
-            <div className="features-scroll-mark" aria-hidden="true">
-              <SectionWatermark position="step" key={STEPS[active].mark}>
-                {STEPS[active].mark}
-              </SectionWatermark>
-            </div>
+          <div className="features-scroll" style={{ '--features-progress': `${progress}%` }}>
             <div className="features-scroll-phone">
               <div className="features-scroll-phone-sticky">
-                <div className="features-phone-card">
-                  <div className="feature-band-orbit" aria-hidden="true" />
-                  <PhoneFrame shot={activeShot} size="lg" className="features-phone-swap" />
+                <div className="features-phone-stage">
+                  <div className="features-phone-glow" aria-hidden="true" />
+                  <div className="features-phone-layers">
+                    {STEPS.map((step, i) => (
+                      <div
+                        key={step.key}
+                        className={`features-phone-layer ${i === active ? 'is-active' : ''}`}
+                      >
+                        <PhoneFrame shot={step.shot} size="lg" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="features-phone-meta">
+                    <span className="features-phone-count">
+                      {String(active + 1).padStart(2, '0')}
+                      <span> / {String(STEPS.length).padStart(2, '0')}</span>
+                    </span>
+                    <div className="features-phone-progress" aria-hidden="true">
+                      <i style={{ width: `${progress}%` }} />
+                    </div>
+                  </div>
                 </div>
+
                 <div className="features-scroll-dots" role="tablist" aria-label="Feature steps">
                   {STEPS.map((step, i) => (
                     <button
@@ -169,6 +179,9 @@ export default function Features() {
             </div>
 
             <div className="features-scroll-copy">
+              <div className="features-scroll-rail" aria-hidden="true">
+                <div className="features-scroll-rail-fill" />
+              </div>
               <p className="sr-only" aria-live="polite">
                 {STEPS[active].eyebrow}: {STEPS[active].title}
               </p>
@@ -179,9 +192,11 @@ export default function Features() {
                   data-step-index={i}
                   className={`features-step ${i === active ? 'is-active' : ''}`}
                 >
-                  <p className="section-label">{step.eyebrow}</p>
-                  <h3 className="feature-band-title">{step.title}</h3>
-                  <p className="feature-band-body">{step.body}</p>
+                  <div className="features-step-card">
+                    <p className="section-label">{step.eyebrow}</p>
+                    <h3 className="feature-band-title">{step.title}</h3>
+                    <p className="feature-band-body">{step.body}</p>
+                  </div>
                 </article>
               ))}
             </div>
@@ -191,9 +206,6 @@ export default function Features() {
             {STEPS.map((step) => (
               <article key={step.key} className="features-stack-item">
                 <div className="features-stack-phone">
-                  <div className="features-stack-mark" aria-hidden="true">
-                    <SectionWatermark position="step">{step.mark}</SectionWatermark>
-                  </div>
                   <PhoneFrame shot={step.shot} size="md" />
                 </div>
                 <div>
