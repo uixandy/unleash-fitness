@@ -587,8 +587,8 @@ h1, h2, h3 {
 .brand-lockup-claw {
   width: 0.72em;
   height: auto;
-  transform: rotate(-43deg);
-  transform-origin: center center;
+  /* SVG is already at logo angle — do not re-rotate */
+  transform: none;
   filter: drop-shadow(0 0 14px rgba(255, 90, 31, 0.45));
   margin-top: -0.06em;
 }
@@ -604,8 +604,8 @@ h1, h2, h3 {
 }
 .hero-claw {
   left: -0.5rem;
-  top: 18%;
-  transform: rotate(-43deg);
+  top: 14%;
+  transform: none;
   opacity: 0.22;
   width: clamp(140px, 28vw, 240px);
   z-index: 0;
@@ -618,17 +618,17 @@ h1, h2, h3 {
 .product-claw {
   right: 2%;
   top: 10%;
-  transform: rotate(-43deg);
+  transform: none;
 }
 .features-claw {
   left: 1%;
   bottom: 8%;
-  transform: rotate(-43deg) scaleX(-1);
+  transform: scaleX(-1);
 }
 .pro-claw {
   left: 4%;
   bottom: 10%;
-  transform: rotate(-43deg) scaleX(-1);
+  transform: scaleX(-1);
   opacity: 0.3;
   width: clamp(150px, 24vw, 260px);
 }
