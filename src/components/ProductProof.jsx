@@ -13,13 +13,13 @@ export default function ProductProof() {
         <div className="reveal-up product-intro">
           <p className="section-label">The product</p>
           <h2 className="display-title">
-            Built for the floor.
+            Train. Eat. Track.
             <br />
-            <span className="text-orange">Not the feed.</span>
+            <span className="text-orange">No fluff.</span>
           </h2>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
-            Production screens from UNLEASH — workouts, recipes, meal planner, and plans.
-            Dark, spare, no vanity dashboards.
+            Real screens from UNLEASH — workouts, recipes, meal planner, and plans.
+            Dark, spare, built to use between sets.
           </p>
         </div>
 

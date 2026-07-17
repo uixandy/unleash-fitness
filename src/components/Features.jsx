@@ -8,21 +8,21 @@ const STEPS = [
     key: 'workout',
     eyebrow: '01 — Logging',
     title: 'Every set. Every rep. No friction.',
-    body: 'Plans, free log, supersets, rest timers, drafts that survive tab switches. Advanced programming stays free — because the floor doesn’t wait for a paywall.',
+    body: 'Plans, free log, supersets, rest timers, drafts that survive tab switches. Advanced programming stays free — your session shouldn’t wait on a paywall.',
     shot: { key: 'workout', label: 'Workout', src: '/screenshots/workout.png' },
   },
   {
     key: 'recipes',
     eyebrow: '02 — Recipes',
-    title: 'Your kitchen, logged like a session.',
-    body: 'Save recipes with ingredients, steps, and macros. Build a library you actually cook from — not a graveyard of screenshots. Manual entry at launch; AI import from URL or photo lands with Pro.',
+    title: 'Recipes with the same discipline.',
+    body: 'Ingredients, steps, macros — saved so you cook from them, not screenshot them. Manual entry at launch; AI import from URL or photo lands with Pro.',
     shot: { key: 'recipes', label: 'Recipes', src: '/screenshots/nutrition-recipes.png' },
   },
   {
     key: 'planner',
     eyebrow: '03 — Meal planner',
     title: 'Plan the week. Hit the macros.',
-    body: 'Drop recipes into a meal planner so training days and kitchen days stay in sync. See protein, carbs, and fat against your goals before you shop — not after you guess.',
+    body: 'Drop recipes into the planner so lifting and eating stay in sync. Protein, carbs, and fat against your goals — before you shop, not after you guess.',
     shot: { key: 'planner', label: 'Meal planner', src: '/screenshots/nutrition-planner.png' },
   },
   {
@@ -120,13 +120,13 @@ export default function Features() {
           <div className="reveal-up features-head">
             <p className="section-label">Features</p>
             <h2 className="display-title max-w-3xl">
-              Floor to kitchen.
+              Train and eat.
               <span className="text-orange"> One tracker.</span>
             </h2>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
               {sticky
                 ? 'Scroll the story — the screen keeps pace. Logging, recipes, meal planner, and programming in one pass.'
-                : 'Logging, recipes, meal planner, and programming — floor to kitchen in one tracker.'}
+                : 'Logging, recipes, meal planner, and programming — training and nutrition in one place.'}
             </p>
           </div>
         </div>

@@ -14,13 +14,13 @@ const SHOTS = [
   {
     key: 'nutrition',
     label: 'Nutrition',
-    caption: 'Recipes, meal planner, and macro goals — kitchen tracking next to the rack.',
+    caption: 'Recipes, meal planner, and macro goals — food tracking that matches your training.',
     src: '/screenshots/nutrition.png',
   },
   {
     key: 'plans',
     label: 'Plans',
-    caption: 'Save programs, run them on the floor, keep history that sticks.',
+    caption: 'Save programs, run them again, keep history that sticks.',
     src: '/screenshots/plans.png',
   },
 ]
