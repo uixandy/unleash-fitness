@@ -1149,6 +1149,90 @@ h1, h2, h3 {
 }
 .footer-links a:hover { color: var(--text-primary); }
 
+/* ── Phone: center copy below the hero ── */
+@media (max-width: 767px) {
+  .product-intro,
+  .features-head,
+  .features-stack-item,
+  .feature-aside,
+  .pro-epic-head,
+  .pro-card-top,
+  .pro-card-cta {
+    text-align: center;
+  }
+
+  .product-intro,
+  .features-head,
+  .pro-epic-head {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .product-intro p,
+  .features-head p,
+  .feature-band-body,
+  .pro-epic-lede,
+  .feature-aside p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .features-stack-item .feature-band-title,
+  .features-stack-item .section-label {
+    text-align: center;
+  }
+
+  .feature-aside {
+    justify-items: center;
+  }
+
+  .pro-card-top-row {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pro-card-cta .w-full,
+  .pro-card-cta > div {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pro-card-list {
+    display: inline-flex;
+    width: 100%;
+  }
+
+  .pro-card-list li {
+    text-align: left;
+  }
+
+  .site-footer .max-w-6xl {
+    text-align: center;
+  }
+
+  .site-footer img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .site-footer .mt-6 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .site-footer .footer-links {
+    align-items: center;
+  }
+
+  .site-footer .label {
+    text-align: center;
+  }
+
+  .constellation-item {
+    text-align: center;
+  }
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .anim-fade-up,

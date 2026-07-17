@@ -5,7 +5,7 @@ export default function Footer({ resolvedTheme = 'dark' }) {
       : '/assets/unleash-logo-dark.svg'
 
   return (
-    <footer className="border-t border-[var(--border)] px-5 sm:px-8 py-14 sm:py-16">
+    <footer className="site-footer border-t border-[var(--border)] px-5 sm:px-8 py-14 sm:py-16">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           <div className="lg:col-span-5">
