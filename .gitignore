@@ -4,10 +4,11 @@ dist
 .env
 .env.local
 .vercel
-.deploy*.json
+.deploy*
+.mcp*
+.last-deployment*
 full-deploy.json
 tiny-deploy.json
 deploy-mcp-body.json
-.mcp-deploy*.json
-.last-deployment.json
+deploy-args-export.mjs
 *.log
