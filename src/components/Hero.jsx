@@ -9,23 +9,15 @@ const HERO_PHONE = {
 
 export default function Hero() {
   return (
-    <section className="hero relative min-h-[100dvh] flex flex-col overflow-hidden">
-      <div className="absolute inset-0 anim-fade-in">
-        <img
-          src="/images/hero-gym.jpg"
-          alt=""
-          className="w-full h-full object-cover opacity-70"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(105deg, rgba(8,14,12,0.72) 0%, rgba(8,14,12,0.45) 42%, rgba(8,14,12,0.35) 70%, rgba(8,14,12,0.75) 100%), linear-gradient(180deg, rgba(8,14,12,0.25) 0%, rgba(8,14,12,0.55) 70%, var(--bg-primary) 100%)',
-          }}
-        />
+    <section className="hero cinematic-hero">
+      <div className="hero-stage" aria-hidden="true">
+        <img src="/images/hero-gym.jpg" alt="" className="hero-stage-img" />
+        <div className="hero-stage-shade" />
+        <div className="hero-stage-glow" />
+        <div className="hero-grain" />
       </div>
 
-      <header className="relative z-10 flex items-center justify-between gap-4 px-5 sm:px-8 py-5 max-w-6xl w-full mx-auto">
+      <header className="hero-top">
         <a href="/" className="shrink-0" aria-label="UNLEASH home">
           <img
             src="/assets/unleash-workout-tracker-logo-dark.svg"
@@ -49,35 +41,36 @@ export default function Hero() {
         </a>
       </header>
 
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-5 sm:px-8 pb-16 pt-6 max-w-6xl w-full mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(220px,280px)] gap-12 lg:gap-16 items-center">
-          <div>
-            <p className="section-label hero-label anim-fade-up">Coming soon</p>
-            <h1 className="anim-fade-up-delay-1 text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] max-w-xl tracking-tight">
-              Train. Eat. Progress.
-              <br />
-              <span style={{ color: 'var(--accent-orange)' }}>One place.</span>
-            </h1>
-            <p className="hero-lede anim-fade-up-delay-2 mt-5 text-base sm:text-lg max-w-lg leading-relaxed">
-              A workout tracker for people who actually lift — sessions, nutrition, and
-              charts without the fluff. Join the waitlist for launch updates and Pro.
-            </p>
+      <div className="hero-body">
+        <div className="hero-copy">
+          <p className="section-label hero-label anim-fade-up">Coming soon</p>
+          <h1 className="hero-title anim-fade-up-delay-1">
+            <span className="hero-title-line">Train.</span>
+            <span className="hero-title-line">Eat.</span>
+            <span className="hero-title-line">Progress.</span>
+            <span className="hero-title-accent">One place.</span>
+          </h1>
+          <div className="hero-rule anim-fade-up-delay-1" aria-hidden="true" />
+          <p className="hero-lede anim-fade-up-delay-2">
+            A workout tracker for people who actually lift — sessions, nutrition, and
+            charts without the fluff. Join the waitlist for launch and Pro.
+          </p>
 
-            <div className="anim-fade-up-delay-2 mt-8 relative">
-              <WaitlistForm id="hero-waitlist" />
-              <p className="hero-helper mt-3 text-sm">
-                No spam. Launch and Pro updates only.
-              </p>
-            </div>
-          </div>
-
-          <div className="hidden lg:block anim-fade-up-delay-2 hero-phone">
-            <PhoneFrame shot={HERO_PHONE} size="lg" />
-            <p className="mt-4 text-center text-xs tracking-wide uppercase text-[var(--text-secondary)]">
-              In the product
-            </p>
+          <div className="hero-cta-panel anim-fade-up-delay-2">
+            <WaitlistForm id="hero-waitlist" />
+            <p className="hero-helper mt-3 text-sm">No spam. Launch and Pro updates only.</p>
           </div>
         </div>
+
+        <div className="hero-device anim-float-in">
+          <div className="hero-device-glow" aria-hidden="true" />
+          <PhoneFrame shot={HERO_PHONE} size="lg" className="hero-device-frame" />
+        </div>
+      </div>
+
+      <div className="hero-scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <i />
       </div>
     </section>
   )

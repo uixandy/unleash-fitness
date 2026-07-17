@@ -1,31 +1,41 @@
 import PhoneFrame, { SHOTS } from './PhoneFrame'
+import useReveal from '../hooks/useReveal'
 
 export default function ProductProof() {
+  const { ref, className } = useReveal()
+
   return (
-    <section id="product" className="section-pad border-t border-[var(--border)]">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="max-w-2xl">
+    <section id="product" className={`product-stage section-pad ${className}`} ref={ref}>
+      <div className="product-watermark" aria-hidden="true">
+        PRODUCT
+      </div>
+
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
+        <div className="reveal-up product-intro">
           <p className="section-label">The product</p>
-          <h2 className="text-3xl sm:text-4xl leading-tight">What you get today</h2>
-          <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
-            Dark, spare, and built around real gym logging — not a feed of vanity metrics.
-            These are production screens from the product we’re opening soon.
+          <h2 className="display-title">
+            Built for the floor.
+            <br />
+            <span className="text-orange">Not the feed.</span>
+          </h2>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+            Production screens from UNLEASH — dark, spare, and serious about logging.
+            No vanity dashboards.
           </p>
         </div>
 
-        <div className="mt-16 proof-rail">
+        <div className="phone-constellation mt-16 sm:mt-20">
           {SHOTS.map((shot, i) => (
             <figure
               key={shot.key}
-              className="proof-item"
-              style={{ animationDelay: `${0.08 + i * 0.08}s` }}
+              className={`constellation-item constellation-item--${i + 1} reveal-up`}
+              style={{ transitionDelay: `${120 + i * 100}ms` }}
             >
-              <PhoneFrame shot={shot} />
-              <figcaption className="mt-5 text-center max-w-[240px] mx-auto px-1">
-                <p className="font-display text-base text-[var(--text-primary)]">{shot.label}</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-[var(--text-secondary)]">
-                  {shot.caption}
-                </p>
+              <PhoneFrame shot={shot} size={i === 1 ? 'lg' : 'md'} />
+              <figcaption>
+                <span className="constellation-index">0{i + 1}</span>
+                <p className="font-display text-lg">{shot.label}</p>
+                <p>{shot.caption}</p>
               </figcaption>
             </figure>
           ))}
