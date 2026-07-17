@@ -92,7 +92,7 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
   }
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-xl">
       <form
         id={id}
         onSubmit={handleSubmit}
