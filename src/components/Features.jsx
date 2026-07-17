@@ -6,6 +6,7 @@ import useReveal from '../hooks/useReveal'
 const STEPS = [
   {
     key: 'workout',
+    mark: 'LOGGING',
     eyebrow: '01 — Logging',
     title: 'Every set. Every rep. No friction.',
     body: 'Plans, free log, supersets, rest timers, drafts that survive tab switches. Advanced programming stays free — because the floor doesn’t wait for a paywall.',
@@ -13,6 +14,7 @@ const STEPS = [
   },
   {
     key: 'recipes',
+    mark: 'RECIPES',
     eyebrow: '02 — Recipes',
     title: 'Your kitchen, logged like a session.',
     body: 'Save recipes with ingredients, steps, and macros. Build a library you actually cook from — not a graveyard of screenshots. Manual entry at launch; AI import from URL or photo lands with Pro.',
@@ -20,6 +22,7 @@ const STEPS = [
   },
   {
     key: 'planner',
+    mark: 'PLANNER',
     eyebrow: '03 — Meal planner',
     title: 'Plan the week. Hit the macros.',
     body: 'Drop recipes into a meal planner so training days and kitchen days stay in sync. See protein, carbs, and fat against your goals before you shop — not after you guess.',
@@ -27,6 +30,7 @@ const STEPS = [
   },
   {
     key: 'plans',
+    mark: 'PLANS',
     eyebrow: '04 — Programming',
     title: 'Save the plan. Run it again.',
     body: 'Build once, start fast, edit on the fly. Prefill from last session. Progressive overload hints when you’re ready to move weight.',
@@ -135,6 +139,11 @@ export default function Features() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 features-body">
         {sticky ? (
           <div className="features-scroll">
+            <div className="features-scroll-mark" aria-hidden="true">
+              <SectionWatermark position="step" key={STEPS[active].mark}>
+                {STEPS[active].mark}
+              </SectionWatermark>
+            </div>
             <div className="features-scroll-phone">
               <div className="features-scroll-phone-sticky">
                 <div className="features-phone-card">
@@ -182,6 +191,9 @@ export default function Features() {
             {STEPS.map((step) => (
               <article key={step.key} className="features-stack-item">
                 <div className="features-stack-phone">
+                  <div className="features-stack-mark" aria-hidden="true">
+                    <SectionWatermark position="step">{step.mark}</SectionWatermark>
+                  </div>
                   <PhoneFrame shot={step.shot} size="md" />
                 </div>
                 <div>

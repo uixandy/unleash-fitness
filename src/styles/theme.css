@@ -12,9 +12,9 @@
   --glass-bg: rgba(8, 14, 12, 0.55);
   --glass-border: rgba(36, 56, 48, 0.85);
   --aside-bg: linear-gradient(135deg, rgba(13, 22, 18, 0.9), rgba(8, 14, 12, 0.6));
-  --watermark-stroke: rgba(240, 240, 238, 0.08);
-  --watermark-glow: rgba(255, 90, 31, 0.05);
-  --stage-glow: rgba(255, 90, 31, 0.08);
+  --watermark-stroke: rgba(240, 240, 238, 0.14);
+  --watermark-glow: rgba(255, 90, 31, 0.1);
+  --stage-glow: rgba(255, 90, 31, 0.12);
 }
 
 [data-theme="light"] {
@@ -31,9 +31,9 @@
   --glass-bg: rgba(255, 255, 255, 0.78);
   --glass-border: rgba(221, 221, 214, 0.95);
   --aside-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(234, 234, 228, 0.85));
-  --watermark-stroke: rgba(13, 22, 18, 0.08);
-  --watermark-glow: rgba(232, 78, 23, 0.04);
-  --stage-glow: rgba(232, 78, 23, 0.07);
+  --watermark-stroke: rgba(13, 22, 18, 0.16);
+  --watermark-glow: rgba(232, 78, 23, 0.14);
+  --stage-glow: rgba(232, 78, 23, 0.14);
 }
 
 @media (prefers-color-scheme: light) {
@@ -51,9 +51,9 @@
     --glass-bg: rgba(255, 255, 255, 0.78);
     --glass-border: rgba(221, 221, 214, 0.95);
     --aside-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(234, 234, 228, 0.85));
-    --watermark-stroke: rgba(13, 22, 18, 0.08);
-    --watermark-glow: rgba(232, 78, 23, 0.04);
-    --stage-glow: rgba(232, 78, 23, 0.07);
+    --watermark-stroke: rgba(13, 22, 18, 0.16);
+    --watermark-glow: rgba(232, 78, 23, 0.14);
+    --stage-glow: rgba(232, 78, 23, 0.14);
   }
 }
 
@@ -70,9 +70,9 @@
   --text-muted: #4E7870;
   --glass-bg: rgba(8, 14, 12, 0.55);
   --glass-border: rgba(36, 56, 48, 0.85);
-  --watermark-stroke: rgba(240, 240, 238, 0.09);
-  --watermark-glow: rgba(255, 90, 31, 0.06);
-  --stage-glow: rgba(255, 90, 31, 0.1);
+  --watermark-stroke: rgba(240, 240, 238, 0.14);
+  --watermark-glow: rgba(255, 90, 31, 0.1);
+  --stage-glow: rgba(255, 90, 31, 0.12);
   color: var(--text-primary);
 }
 
@@ -687,12 +687,12 @@ h1, h2, h3 {
   letter-spacing: -0.06em;
   line-height: 0.85;
   color: transparent;
-  -webkit-text-stroke: 1px var(--watermark-stroke);
-  text-shadow: 0 0 22px var(--watermark-glow);
+  -webkit-text-stroke: 1.25px var(--watermark-stroke);
+  text-shadow: 0 0 28px var(--watermark-glow);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  opacity: 0.6;
+  opacity: 0.75;
   z-index: 0;
 }
 .section-watermark--top {
@@ -706,7 +706,31 @@ h1, h2, h3 {
   left: auto;
   translate: 0 0;
   font-size: clamp(5rem, 18vw, 14rem);
-  opacity: 0.5;
+  opacity: 0.65;
+}
+.section-watermark--step {
+  position: relative;
+  top: auto;
+  left: auto;
+  translate: none;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: clamp(3.5rem, 12vw, 9rem);
+  opacity: 0.7;
+  animation: watermarkStepIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes watermarkStepIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 0.7;
+    transform: none;
+  }
 }
 
 /* ── Product constellation ── */
@@ -781,10 +805,29 @@ h1, h2, h3 {
 }
 
 .features-scroll {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(260px, 0.85fr) 1.15fr;
   gap: 3rem;
   align-items: stretch;
+}
+
+.features-scroll-mark {
+  position: sticky;
+  top: 30vh;
+  height: 0;
+  z-index: 0;
+  pointer-events: none;
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.features-scroll-phone,
+.features-scroll-copy {
+  position: relative;
+  z-index: 1;
 }
 
 .features-scroll-phone {
@@ -879,8 +922,26 @@ h1, h2, h3 {
   align-items: center;
 }
 .features-stack-phone {
+  position: relative;
   display: flex;
   justify-content: center;
+}
+.features-stack-mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.features-stack-mark .section-watermark {
+  font-size: clamp(2.5rem, 18vw, 4.5rem);
+}
+.features-stack-phone .phone-frame {
+  position: relative;
+  z-index: 1;
 }
 
 .feature-band-title {
@@ -944,11 +1005,15 @@ h1, h2, h3 {
 
 @media (prefers-reduced-motion: reduce) {
   .features-phone-swap,
-  .features-step {
+  .features-step,
+  .section-watermark--step {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+  .section-watermark--step {
+    opacity: 0.7 !important;
   }
 }
 
