@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import PhoneFrame from './PhoneFrame'
+import SectionWatermark from './SectionWatermark'
 import useReveal from '../hooks/useReveal'
 
 const STEPS = [
@@ -112,8 +113,10 @@ export default function Features() {
   const activeShot = STEPS[active].shot
 
   return (
-    <section id="features" className={`features-cinematic section-pad ${className}`} ref={ref}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+    <section id="features" className={`features-cinematic section-stage section-pad ${className}`} ref={ref}>
+      <SectionWatermark position="features">FEATURES</SectionWatermark>
+
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
         <div className="reveal-up features-head mb-12 sm:mb-16">
           <p className="section-label">Features</p>
           <h2 className="display-title max-w-3xl">

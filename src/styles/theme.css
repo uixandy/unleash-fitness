@@ -70,6 +70,9 @@
   --text-muted: #4E7870;
   --glass-bg: rgba(8, 14, 12, 0.55);
   --glass-border: rgba(36, 56, 48, 0.85);
+  --watermark-stroke: rgba(240, 240, 238, 0.16);
+  --watermark-glow: rgba(255, 90, 31, 0.14);
+  --stage-glow: rgba(255, 90, 31, 0.14);
   color: var(--text-primary);
 }
 
@@ -663,33 +666,53 @@ h1, h2, h3 {
   .hero-scroll-hint { display: flex; }
 }
 
-/* ── Product constellation ── */
-.product-stage {
+/* ── Shared section stage + watermark ── */
+.section-stage {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 70% 45% at 65% 10%, var(--stage-glow), transparent 58%),
-    linear-gradient(180deg, var(--stage-mid) 0%, var(--bg-primary) 40%, var(--stage-mid) 100%);
+    radial-gradient(ellipse 70% 45% at 70% 0%, var(--stage-glow), transparent 58%),
+    linear-gradient(180deg, var(--stage-mid) 0%, var(--bg-primary) 42%, var(--stage-mid) 100%);
   border-top: 1px solid var(--border);
 }
-.product-watermark {
+
+.section-watermark {
   position: absolute;
-  top: 8%;
-  left: 50%;
-  translate: -50% 0;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  font-size: clamp(5rem, 18vw, 14rem);
+  font-size: clamp(4.5rem, 16vw, 12rem);
   letter-spacing: -0.06em;
+  line-height: 0.85;
   color: transparent;
   -webkit-text-stroke: 1px var(--watermark-stroke);
-  text-shadow: 0 0 36px var(--watermark-glow);
+  text-shadow: 0 0 28px var(--watermark-glow);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  opacity: 0.9;
+  opacity: 0.85;
   z-index: 0;
 }
+.section-watermark--top {
+  top: 7%;
+  left: 50%;
+  translate: -50% 0;
+}
+.section-watermark--right {
+  top: 12%;
+  right: -2%;
+  left: auto;
+  translate: 0 0;
+  font-size: clamp(5rem, 20vw, 16rem);
+  opacity: 0.7;
+}
+.section-watermark--features {
+  top: 4%;
+  left: 50%;
+  translate: -50% 0;
+  font-size: clamp(4rem, 14vw, 11rem);
+}
+
+/* ── Product constellation ── */
 .product-intro { max-width: 40rem; }
 
 .phone-constellation {
@@ -733,10 +756,6 @@ h1, h2, h3 {
 }
 
 /* ── Feature sticky scroll ── */
-.features-cinematic {
-  background: var(--bg-primary);
-  border-top: 1px solid var(--border);
-}
 
 .features-scroll {
   display: grid;

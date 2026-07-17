@@ -1,4 +1,5 @@
 import WaitlistForm from './WaitlistForm'
+import SectionWatermark from './SectionWatermark'
 import useReveal from '../hooks/useReveal'
 
 const FREE = [
@@ -29,6 +30,7 @@ export default function ProTeaser() {
         <div className="pro-epic-beam" />
         <div className="hero-grain" />
       </div>
+      <SectionWatermark position="right">PRO</SectionWatermark>
 
       <div className="pro-epic-inner">
         <header className="pro-epic-head reveal-up">

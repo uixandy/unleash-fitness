@@ -1,14 +1,13 @@
 import PhoneFrame, { SHOTS } from './PhoneFrame'
+import SectionWatermark from './SectionWatermark'
 import useReveal from '../hooks/useReveal'
 
 export default function ProductProof() {
   const { ref, className } = useReveal()
 
   return (
-    <section id="product" className={`product-stage section-pad ${className}`} ref={ref}>
-      <div className="product-watermark" aria-hidden="true">
-        PRODUCT
-      </div>
+    <section id="product" className={`product-stage section-stage section-pad ${className}`} ref={ref}>
+      <SectionWatermark>PRODUCT</SectionWatermark>
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
         <div className="reveal-up product-intro">
