@@ -106,11 +106,45 @@ function useActiveStep(enabled, count) {
   return { active, setStepRef, scrollToStep }
 }
 
+/** Continuous 0→100 fill as the sticky features track scrolls top → bottom. */
+function useRailProgress(enabled) {
+  const trackRef = useRef(null)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    if (!enabled) return undefined
+
+    const update = () => {
+      const el = trackRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const travel = rect.height - window.innerHeight
+      if (travel <= 0) {
+        setProgress(rect.bottom <= window.innerHeight ? 100 : 0)
+        return
+      }
+      const scrolled = Math.min(travel, Math.max(0, -rect.top))
+      setProgress((scrolled / travel) * 100)
+    }
+
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [enabled])
+
+  return { trackRef, progress }
+}
+
 export default function Features() {
   const { ref, className } = useReveal()
   const sticky = useDesktopSticky()
   const { active, setStepRef, scrollToStep } = useActiveStep(sticky, STEPS.length)
-  const progress = ((active + 1) / STEPS.length) * 100
+  const { trackRef, progress: railProgress } = useRailProgress(sticky)
+  const stepProgress = ((active + 1) / STEPS.length) * 100
 
   return (
     <section id="features" className={`features-cinematic ${className}`} ref={ref}>
@@ -134,7 +168,11 @@ export default function Features() {
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 features-body">
         {sticky ? (
-          <div className="features-scroll" style={{ '--features-progress': `${progress}%` }}>
+          <div
+            className="features-scroll"
+            ref={trackRef}
+            style={{ '--features-progress': `${railProgress}%` }}
+          >
             <div className="features-scroll-phone">
               <div className="features-scroll-phone-sticky">
                 <div className="features-phone-stage">
@@ -148,7 +186,7 @@ export default function Features() {
                       <span> / {String(STEPS.length).padStart(2, '0')}</span>
                     </span>
                     <div className="features-phone-progress" aria-hidden="true">
-                      <i style={{ width: `${progress}%` }} />
+                      <i style={{ width: `${stepProgress}%` }} />
                     </div>
                   </div>
                 </div>

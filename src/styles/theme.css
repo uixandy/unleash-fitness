@@ -928,8 +928,8 @@ h1, h2, h3 {
 .features-scroll-rail {
   position: absolute;
   left: 0;
-  top: 8%;
-  bottom: 8%;
+  top: 0;
+  bottom: 0;
   width: 2px;
   border-radius: 999px;
   background: var(--border);
@@ -940,9 +940,10 @@ h1, h2, h3 {
   left: 0;
   top: 0;
   width: 100%;
-  height: var(--features-progress, 25%);
+  height: var(--features-progress, 0%);
   background: var(--accent-orange);
-  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Scroll-linked — no laggy height transition */
+  transition: none;
 }
 
 .features-step {
