@@ -8,7 +8,7 @@ const HERO_PHONE = {
   src: '/screenshots/workout.png',
 }
 
-export default function Hero({ theme, onSetTheme }) {
+export default function Hero({ theme, resolvedTheme, onSetTheme }) {
   return (
     <section className="hero cinematic-hero theme-locked-dark">
       <div className="hero-stage" aria-hidden="true">
