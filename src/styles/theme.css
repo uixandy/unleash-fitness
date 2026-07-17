@@ -135,6 +135,23 @@ html, body {
   margin: 0 0 12px;
 }
 
+/* Hero-only contrast: brighter secondary copy over the dark gym photo */
+.hero-label {
+  color: #3DD4C0;
+}
+.hero-lede {
+  color: #B8D0CA;
+}
+.hero-helper {
+  color: #8FB5AD;
+}
+.hero-helper-link {
+  color: #B8D0CA;
+}
+.hero-helper-link:hover {
+  color: var(--text-primary);
+}
+
 h1, h2, h3 {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
