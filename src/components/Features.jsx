@@ -114,7 +114,7 @@ export default function Features() {
 
   return (
     <section id="features" className={`features-cinematic section-stage section-pad ${className}`} ref={ref}>
-      <SectionWatermark position="features">FEATURES</SectionWatermark>
+      <SectionWatermark>FEATURES</SectionWatermark>
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
         <div className="reveal-up features-head">
