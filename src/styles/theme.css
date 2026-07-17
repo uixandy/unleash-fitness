@@ -683,16 +683,16 @@ h1, h2, h3 {
   position: absolute;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  font-size: clamp(4rem, 14vw, 10rem);
+  font-size: clamp(4.5rem, 16vw, 12rem);
   letter-spacing: -0.06em;
   line-height: 0.85;
   color: transparent;
   -webkit-text-stroke: 1px var(--watermark-stroke);
-  text-shadow: 0 0 18px var(--watermark-glow);
+  text-shadow: 0 0 22px var(--watermark-glow);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  opacity: 0.55;
+  opacity: 0.6;
   z-index: 0;
 }
 .section-watermark--top {
@@ -705,16 +705,8 @@ h1, h2, h3 {
   right: -2%;
   left: auto;
   translate: 0 0;
-  font-size: clamp(4.5rem, 18vw, 13rem);
-  opacity: 0.45;
-}
-.section-watermark--features {
-  top: 1.5rem;
-  right: 0;
-  left: auto;
-  translate: 0 0;
-  font-size: clamp(3.5rem, 12vw, 8rem);
-  opacity: 0.4;
+  font-size: clamp(5rem, 18vw, 14rem);
+  opacity: 0.5;
 }
 
 /* ── Product constellation ── */
