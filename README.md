@@ -28,7 +28,7 @@ Requires Vercel env:
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `RESEND_API_KEY`
 - `RESEND_FROM` — e.g. `UNLEASH <hello@unleash.fitness>`
-- `RESEND_NOTIFY_TO` — optional signup pings
+- `RESEND_NOTIFY_TO` — signup pings (`andy@unleash.fitness`)
 - `RESEND_WAITLIST_SEGMENT_ID`
 - `RESEND_PRODUCT_TOPIC_ID`
 

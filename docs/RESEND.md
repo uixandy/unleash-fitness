@@ -38,14 +38,27 @@ Use **Broadcasts** (not the nurture automation):
 
 Optional shell template alias: `broadcast-update-shell` (variables `UPDATE_TITLE`, `UPDATE_BODY_HTML`, `CTA_LABEL`, `CTA_HREF`).
 
-## Vercel env (required for production)
+## Vercel env (production — set 2026-07-17)
+
+Project: **Unleash Fitness** team → `unleash-fitness` (not the wowdesign-io CLI default).
+
+Also required (serverless waitlist insert):
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Resend:
 
 ```
 RESEND_API_KEY=re_…
 RESEND_FROM=UNLEASH <hello@unleash.fitness>
-RESEND_NOTIFY_TO=you@example.com
+RESEND_NOTIFY_TO=andy@unleash.fitness
 RESEND_WAITLIST_SEGMENT_ID=e3e1cd44-a27c-4980-a50a-cd49974884ef
 RESEND_PRODUCT_TOPIC_ID=f84dc026-b7d0-4c6f-aa18-1d85b7e27ddd
 ```
 
-After signup the API: saves to Supabase → creates/updates Resend contact on Waitlist → fires `waitlist.joined` → nurture runs.
+Notify pings go to **andy@unleash.fitness** (UNLEASH inbox — not wowdesign).
+
+After signup the API: saves to Supabase → creates/updates Resend contact on Waitlist → fires `waitlist.joined` → nurture runs → optional notify to `RESEND_NOTIFY_TO`.
+
+Redeploy after any env change so serverless functions pick up new values.
