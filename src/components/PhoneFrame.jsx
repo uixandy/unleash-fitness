@@ -3,6 +3,7 @@
  * Proof: workout, nutrition, plans, library
  * Features extras: nutrition-planner, nutrition-recipes
  */
+/** Three frames for the product proof rail */
 const SHOTS = [
   {
     key: 'workout',
@@ -21,12 +22,6 @@ const SHOTS = [
     label: 'Plans',
     caption: 'Save programs, run them on the floor, keep history that sticks.',
     src: '/screenshots/plans.png',
-  },
-  {
-    key: 'library',
-    label: 'Library',
-    caption: 'Machine-first library today. Full catalog unlocks with Pro.',
-    src: '/screenshots/library.png',
   },
 ]
 

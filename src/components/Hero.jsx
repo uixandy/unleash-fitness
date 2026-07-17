@@ -55,7 +55,6 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(220px,280px)] gap-12 lg:gap-16 items-center">
           <div>
             <p className="section-label hero-label anim-fade-up">Early access</p>
-            <p className="hero-brand anim-fade-up">UNLEASH</p>
             <h1 className="anim-fade-up-delay-1 text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] max-w-xl tracking-tight">
               Train. Eat. Progress.
               <br />

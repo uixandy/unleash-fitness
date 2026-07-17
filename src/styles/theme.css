@@ -142,17 +142,19 @@ html, body {
 }
 
 /* Hero-only contrast over the dark gym photo */
+.section-pad {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+@media (min-width: 640px) {
+  .section-pad {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+  }
+}
+
 .hero-label {
   color: #3DD4C0;
-}
-.hero-brand {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.75rem, 8vw, 4.5rem);
-  letter-spacing: -0.03em;
-  line-height: 0.95;
-  color: var(--text-primary);
-  margin: 0 0 0.35em;
 }
 .hero-lede {
   color: #B8D0CA;
@@ -170,6 +172,34 @@ html, body {
   max-width: 260px;
   margin-left: auto;
   margin-right: 0;
+}
+
+.proof-rail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.75rem;
+  justify-items: center;
+}
+@media (min-width: 640px) {
+  .proof-rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: end;
+  }
+  .proof-item:nth-child(2) {
+    transform: translateY(-1.25rem);
+  }
+}
+@media (min-width: 1024px) {
+  .proof-rail {
+    gap: 2rem;
+  }
+}
+.proof-item {
+  width: 100%;
+  max-width: 280px;
+  margin: 0;
+  animation: fadeUp 0.7s ease-out both;
 }
 
 h1, h2, h3 {
@@ -228,9 +258,13 @@ h1, h2, h3 {
     0 24px 48px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
-
-.phone-frame::before {
-  content: '';
+.phone-frame--lg {
+  max-width: 280px;
+}
+.phone-frame--sm {
+  max-width: 180px;
+}
+.phone-notch {
   display: block;
   width: 72px;
   height: 6px;
@@ -272,6 +306,7 @@ h1, h2, h3 {
   }
 }
 
+.feature-row,
 .feature-item {
   display: flex;
   gap: 16px;
@@ -280,9 +315,11 @@ h1, h2, h3 {
 }
 
 @media (min-width: 640px) {
+  .feature-row:nth-child(odd),
   .feature-item:nth-child(odd) {
     padding-right: 28px;
   }
+  .feature-row:nth-child(even),
   .feature-item:nth-child(even) {
     padding-left: 28px;
     border-left: 1px solid var(--border);
