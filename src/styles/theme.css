@@ -12,7 +12,9 @@
   --glass-bg: rgba(8, 14, 12, 0.55);
   --glass-border: rgba(36, 56, 48, 0.85);
   --aside-bg: linear-gradient(135deg, rgba(13, 22, 18, 0.9), rgba(8, 14, 12, 0.6));
-  --watermark-stroke: rgba(36, 56, 48, 0.55);
+  --watermark-stroke: rgba(240, 240, 238, 0.22);
+  --watermark-glow: rgba(255, 90, 31, 0.35);
+  --stage-glow: rgba(255, 90, 31, 0.22);
 }
 
 [data-theme="light"] {
@@ -29,7 +31,9 @@
   --glass-bg: rgba(255, 255, 255, 0.78);
   --glass-border: rgba(221, 221, 214, 0.95);
   --aside-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(234, 234, 228, 0.85));
-  --watermark-stroke: rgba(13, 22, 18, 0.12);
+  --watermark-stroke: rgba(13, 22, 18, 0.14);
+  --watermark-glow: rgba(232, 78, 23, 0.18);
+  --stage-glow: rgba(232, 78, 23, 0.14);
 }
 
 @media (prefers-color-scheme: light) {
@@ -47,7 +51,9 @@
     --glass-bg: rgba(255, 255, 255, 0.78);
     --glass-border: rgba(221, 221, 214, 0.95);
     --aside-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(234, 234, 228, 0.85));
-    --watermark-stroke: rgba(13, 22, 18, 0.12);
+    --watermark-stroke: rgba(13, 22, 18, 0.14);
+    --watermark-glow: rgba(232, 78, 23, 0.18);
+    --stage-glow: rgba(232, 78, 23, 0.14);
   }
 }
 
@@ -662,13 +668,14 @@ h1, h2, h3 {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255, 90, 31, 0.08), transparent 55%),
+    radial-gradient(ellipse 80% 55% at 70% 8%, var(--stage-glow), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 30%, rgba(255, 90, 31, 0.1), transparent 55%),
     linear-gradient(180deg, var(--stage-mid) 0%, var(--bg-primary) 40%, var(--stage-mid) 100%);
   border-top: 1px solid var(--border);
 }
 .product-watermark {
   position: absolute;
-  top: 8%;
+  top: 6%;
   left: 50%;
   translate: -50% 0;
   font-family: 'Space Grotesk', sans-serif;
@@ -676,11 +683,15 @@ h1, h2, h3 {
   font-size: clamp(5rem, 18vw, 14rem);
   letter-spacing: -0.06em;
   color: transparent;
-  -webkit-text-stroke: 1px var(--watermark-stroke);
+  -webkit-text-stroke: 1.5px var(--watermark-stroke);
+  text-shadow:
+    0 0 40px var(--watermark-glow),
+    0 0 80px var(--watermark-glow);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  opacity: 0.7;
+  opacity: 1;
+  z-index: 0;
 }
 .product-intro { max-width: 40rem; }
 
