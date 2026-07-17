@@ -9,12 +9,12 @@ Production captures from the UNLEASH app (portrait, dark mode).
 | `workout.png` | Active workout session (Full Body) |
 | `nutrition.png` | Nutrition Goals |
 | `plans.png` | Plans (Full Body plan card) |
+| `library.png` | Exercise library |
 
-## Extra assets (available, not in the 3-up proof)
+## Extra assets (features section)
 
 | File | Screen |
 |------|--------|
-| `library.png` | Exercise library |
 | `nutrition-planner.png` | Nutrition Planner |
 | `nutrition-recipes.png` | Nutrition Recipes |
 | `nutrition-goals-alt.png` | Nutrition Goals (alternate crop) |
