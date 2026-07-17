@@ -54,8 +54,8 @@ export default function ProTeaser() {
               <p className="label" style={{ marginBottom: 0 }}>
                 Free
               </p>
-              <p className="font-display text-2xl mt-2">Early access</p>
-              <p className="mt-1 text-sm text-[var(--text-muted)]">Live now at app.unleash.fitness</p>
+              <p className="font-display text-2xl mt-2">Included</p>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">At launch — no paywall on the basics</p>
             </div>
             <ul className="tier-list">
               {FREE.map((item) => (
@@ -89,9 +89,9 @@ export default function ProTeaser() {
         </div>
 
         <div className="mt-12 max-w-md waitlist-block">
-          <p className="label">Pro waitlist</p>
+          <p className="label">Waitlist</p>
           <p className="mb-4 text-sm text-[var(--text-secondary)] leading-relaxed">
-            One email when Pro launches. No spam, no sales drip.
+            One email for launch and Pro. No spam, no sales drip.
           </p>
           <WaitlistForm id="pro-waitlist" />
         </div>

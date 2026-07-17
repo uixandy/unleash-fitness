@@ -1,5 +1,3 @@
-const APP_URL = 'https://app.unleash.fitness'
-
 export default function Footer() {
   return (
     <footer className="border-t border-[var(--border)] px-5 sm:px-8 py-14 sm:py-16">
@@ -8,20 +6,16 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <img src="/assets/unleash-logo-dark.svg" alt="UNLEASH" className="h-8 w-auto" />
             <p className="mt-4 text-sm text-[var(--text-secondary)] max-w-sm leading-relaxed">
-              Workout tracking for people who train. Early access live. Pro waitlist open.
-              No fake social proof — just the product.
+              Workout tracking for people who train. Waitlist open for launch and Pro.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={APP_URL} className="btn-outline text-sm">
-                Try the app
-              </a>
-              <a href="#hero-waitlist" className="btn-ghost text-sm">
+            <div className="mt-6">
+              <a href="#hero-waitlist" className="btn-primary text-sm">
                 Join waitlist
               </a>
             </div>
           </div>
 
-          <div className="lg:col-span-2 sm:col-start-1 lg:col-start-7">
+          <div className="lg:col-span-2 sm:col-start-1 lg:col-start-8">
             <p className="label">On this site</p>
             <ul className="footer-links">
               <li>
@@ -40,17 +34,6 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="label">The app</p>
-            <ul className="footer-links">
-              <li>
-                <a href={APP_URL} rel="noopener noreferrer">
-                  Open app
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
             <p className="label">Legal</p>
             <ul className="footer-links">
               <li>
@@ -64,9 +47,7 @@ export default function Footer() {
           <p className="text-xs text-[var(--text-muted)]">
             © {new Date().getFullYear()} UNLEASH. All rights reserved.
           </p>
-          <p className="text-xs text-[var(--text-muted)]">
-            app.unleash.fitness · unleash.fitness
-          </p>
+          <p className="text-xs text-[var(--text-muted)]">unleash.fitness</p>
         </div>
       </div>
     </footer>

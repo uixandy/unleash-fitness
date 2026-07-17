@@ -8,8 +8,8 @@ export default function ProductProof() {
           <p className="section-label">The product</p>
           <h2 className="text-3xl sm:text-4xl leading-tight">What you get today</h2>
           <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
-            Live at app.unleash.fitness. Dark, spare, and built around real gym logging —
-            not a feed of vanity metrics. These are production screens from early access.
+            Dark, spare, and built around real gym logging — not a feed of vanity metrics.
+            These are production screens from the product we’re opening soon.
           </p>
         </div>
 

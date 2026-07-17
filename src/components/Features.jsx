@@ -51,7 +51,7 @@ export default function Features() {
               Built for the floor, not the feed
             </h2>
             <p className="mt-4 text-[var(--text-secondary)] max-w-md leading-relaxed">
-              Everything below ships today in early access. No invented metrics —
+              Everything below is in the product we’re opening. No invented metrics —
               just the tools you need between sets.
             </p>
           </div>

@@ -1,8 +1,6 @@
 import WaitlistForm from './WaitlistForm'
 import PhoneFrame from './PhoneFrame'
 
-const APP_URL = 'https://app.unleash.fitness'
-
 const HERO_PHONE = {
   key: 'workout',
   label: 'Workout',
@@ -46,15 +44,15 @@ export default function Hero() {
             Pro
           </a>
         </nav>
-        <a href={APP_URL} className="btn-outline text-sm shrink-0">
-          Try the app
+        <a href="#hero-waitlist" className="btn-outline text-sm shrink-0">
+          Join waitlist
         </a>
       </header>
 
       <div className="relative z-10 flex-1 flex flex-col justify-center px-5 sm:px-8 pb-16 pt-6 max-w-6xl w-full mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(220px,280px)] gap-12 lg:gap-16 items-center">
           <div>
-            <p className="section-label hero-label anim-fade-up">Early access</p>
+            <p className="section-label hero-label anim-fade-up">Coming soon</p>
             <h1 className="anim-fade-up-delay-1 text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] max-w-xl tracking-tight">
               Train. Eat. Progress.
               <br />
@@ -62,16 +60,13 @@ export default function Hero() {
             </h1>
             <p className="hero-lede anim-fade-up-delay-2 mt-5 text-base sm:text-lg max-w-lg leading-relaxed">
               A workout tracker for people who actually lift — sessions, nutrition, and
-              charts without the fluff. Early access is live. Pro is coming.
+              charts without the fluff. Join the waitlist for launch updates and Pro.
             </p>
 
             <div className="anim-fade-up-delay-2 mt-8 relative">
               <WaitlistForm id="hero-waitlist" />
               <p className="hero-helper mt-3 text-sm">
-                No spam. Launch updates only.{' '}
-                <a href={APP_URL} className="hero-helper-link underline-offset-2 hover:underline">
-                  Or try early access now
-                </a>
+                No spam. Launch and Pro updates only.
               </p>
             </div>
           </div>
@@ -79,7 +74,7 @@ export default function Hero() {
           <div className="hidden lg:block anim-fade-up-delay-2 hero-phone">
             <PhoneFrame shot={HERO_PHONE} size="lg" />
             <p className="mt-4 text-center text-xs tracking-wide uppercase text-[var(--text-secondary)]">
-              Live in the app
+              In the product
             </p>
           </div>
         </div>
