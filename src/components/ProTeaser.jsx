@@ -21,11 +21,11 @@ export default function ProTeaser() {
   return (
     <section
       id="pro"
-      className="relative px-5 sm:px-8 py-20 border-t border-[var(--border)] overflow-hidden"
+      className="relative section-pad border-t border-[var(--border)] overflow-hidden"
     >
-      <div className="absolute inset-0 pointer-events-none opacity-20">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.22]">
         <img
-          src="https://raw.githubusercontent.com/uixandy/unleash-fitness/main/public/images/lifestyle-barbell.jpg"
+          src="/images/lifestyle-barbell.jpg"
           alt=""
           className="w-full h-full object-cover"
         />
@@ -33,47 +33,54 @@ export default function ProTeaser() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(90deg, var(--bg-primary) 0%, rgba(8,14,12,0.92) 45%, rgba(8,14,12,0.75) 100%)',
+              'linear-gradient(105deg, var(--bg-primary) 0%, rgba(8,14,12,0.94) 42%, rgba(8,14,12,0.78) 100%)',
           }}
         />
       </div>
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-8">
         <p className="section-label">Coming soon</p>
         <h2 className="text-3xl sm:text-4xl max-w-xl leading-tight">
           Free feels complete. Pro goes further.
         </h2>
         <p className="mt-4 text-[var(--text-secondary)] max-w-xl leading-relaxed">
-          Pricing isn’t set yet. We’re opening a waitlist so you hear first when Pro launches —
-          no checkout, no pressure.
+          From our GTM plan: advanced programming stays free. Pro unlocks library breadth,
+          longer analytics, and AI. Pricing isn’t set — join the waitlist to hear first.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
-          <div className="rounded-[10px] border border-[var(--border)] bg-[var(--bg-card)]/90 p-6 backdrop-blur-sm">
-            <p className="label">Free</p>
-            <p className="font-display text-2xl mt-1">Early access</p>
-            <ul className="mt-5 space-y-3">
+        <div className="mt-12 max-w-3xl tier-compare">
+          <div className="tier-panel">
+            <div className="tier-head">
+              <p className="label" style={{ marginBottom: 0 }}>
+                Free
+              </p>
+              <p className="font-display text-2xl mt-2">Early access</p>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">Live now at app.unleash.fitness</p>
+            </div>
+            <ul className="tier-list">
               {FREE.map((item) => (
-                <li key={item} className="text-sm text-[var(--text-secondary)] flex gap-2">
-                  <span className="text-[var(--accent-teal)] shrink-0">—</span>
+                <li key={item}>
+                  <span className="tier-mark tier-mark--teal" aria-hidden="true" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div
-            className="rounded-[10px] border p-6 bg-[var(--bg-card)]/90 backdrop-blur-sm"
-            style={{ borderColor: 'rgba(255, 90, 31, 0.45)' }}
-          >
-            <p className="label" style={{ color: 'var(--accent-orange)' }}>Pro</p>
-            <p className="font-display text-2xl mt-1">
-              Price TBD
-            </p>
-            <ul className="mt-5 space-y-3">
+          <div className="tier-panel tier-panel--pro">
+            <div className="tier-head">
+              <p className="label" style={{ marginBottom: 0, color: 'var(--accent-orange)' }}>
+                Pro
+              </p>
+              <p className="font-display text-2xl mt-2">Price TBD</p>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">
+                Honest placeholder — no fake checkout
+              </p>
+            </div>
+            <ul className="tier-list">
               {PRO.map((item) => (
-                <li key={item} className="text-sm text-[var(--text-secondary)] flex gap-2">
-                  <span className="text-[var(--accent-orange)] shrink-0">—</span>
+                <li key={item}>
+                  <span className="tier-mark tier-mark--orange" aria-hidden="true" />
                   {item}
                 </li>
               ))}
@@ -81,8 +88,11 @@ export default function ProTeaser() {
           </div>
         </div>
 
-        <div className="mt-10 max-w-md relative">
-          <p className="label">Get notified</p>
+        <div className="mt-12 max-w-md waitlist-block">
+          <p className="label">Pro waitlist</p>
+          <p className="mb-4 text-sm text-[var(--text-secondary)] leading-relaxed">
+            One email when Pro launches. No spam, no sales drip.
+          </p>
           <WaitlistForm id="pro-waitlist" />
         </div>
       </div>

@@ -2,6 +2,7 @@ import Hero from './components/Hero'
 import ProductProof from './components/ProductProof'
 import Features from './components/Features'
 import ProTeaser from './components/ProTeaser'
+import ClosingBand from './components/ClosingBand'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -11,7 +12,9 @@ export default function App() {
     return (
       <>
         <main className="max-w-2xl mx-auto px-5 py-16">
-          <a href="/" className="btn-ghost text-sm mb-8 inline-flex">← Back</a>
+          <a href="/" className="btn-ghost text-sm mb-8 inline-flex">
+            ← Back
+          </a>
           <h1 className="text-3xl">Privacy</h1>
           <p className="mt-6 text-[var(--text-secondary)] leading-relaxed">
             If you join the waitlist, we store your email solely to notify you about UNLEASH
@@ -34,6 +37,7 @@ export default function App() {
       <ProductProof />
       <Features />
       <ProTeaser />
+      <ClosingBand />
       <Footer />
     </>
   )

@@ -1,33 +1,52 @@
 /**
- * Product proof screenshots in public/screenshots/:
- *   workout.png | nutrition.png | plans.png
- * Extra assets: library.png, nutrition-planner.png, nutrition-recipes.png
+ * Screenshots in public/screenshots/
+ * Proof: workout, nutrition, plans, library
+ * Features extras: nutrition-planner, nutrition-recipes
  */
 const SHOTS = [
   {
     key: 'workout',
     label: 'Workout',
+    caption: 'Sets, supersets, rest timer — log between sets without fighting the UI.',
     src: '/screenshots/workout.png',
   },
   {
     key: 'nutrition',
     label: 'Nutrition',
+    caption: 'Macro goals and meal tracking in the same app as your training.',
     src: '/screenshots/nutrition.png',
   },
   {
     key: 'plans',
     label: 'Plans',
+    caption: 'Save programs, run them on the floor, keep history that sticks.',
     src: '/screenshots/plans.png',
+  },
+  {
+    key: 'library',
+    label: 'Library',
+    caption: 'Machine-first library today. Full catalog unlocks with Pro.',
+    src: '/screenshots/library.png',
   },
 ]
 
 function PhoneScreen({ shot }) {
-  return <img src={shot.src} alt={`UNLEASH ${shot.label} screen`} />
+  return (
+    <img
+      src={shot.src}
+      alt={`UNLEASH ${shot.label} screen`}
+      loading="lazy"
+      decoding="async"
+    />
+  )
 }
 
-export default function PhoneFrame({ shot, className = '' }) {
+export default function PhoneFrame({ shot, className = '', size = 'md' }) {
+  const sizeClass = size === 'lg' ? 'phone-frame--lg' : size === 'sm' ? 'phone-frame--sm' : ''
+
   return (
-    <div className={`phone-frame ${className}`}>
+    <div className={`phone-frame ${sizeClass} ${className}`.trim()}>
+      <div className="phone-notch" aria-hidden="true" />
       <div className="phone-screen">
         <PhoneScreen shot={shot} />
       </div>
