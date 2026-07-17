@@ -14,13 +14,13 @@ export default function Hero() {
         <img
           src="/images/hero-gym.jpg"
           alt=""
-          className="w-full h-full object-cover opacity-35"
+          className="w-full h-full object-cover opacity-70"
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(8,14,12,0.62) 0%, rgba(8,14,12,0.88) 55%, var(--bg-primary) 100%)',
+              'linear-gradient(105deg, rgba(8,14,12,0.72) 0%, rgba(8,14,12,0.45) 42%, rgba(8,14,12,0.35) 70%, rgba(8,14,12,0.75) 100%), linear-gradient(180deg, rgba(8,14,12,0.25) 0%, rgba(8,14,12,0.55) 70%, var(--bg-primary) 100%)',
           }}
         />
       </div>

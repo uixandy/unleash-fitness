@@ -23,7 +23,7 @@ export default function ProTeaser() {
       id="pro"
       className="relative section-pad border-t border-[var(--border)] overflow-hidden"
     >
-      <div className="absolute inset-0 pointer-events-none opacity-[0.22]">
+      <div className="absolute inset-0 pointer-events-none opacity-55">
         <img
           src="/images/lifestyle-barbell.jpg"
           alt=""
@@ -33,7 +33,7 @@ export default function ProTeaser() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(105deg, var(--bg-primary) 0%, rgba(8,14,12,0.94) 42%, rgba(8,14,12,0.78) 100%)',
+              'linear-gradient(105deg, rgba(8,14,12,0.88) 0%, rgba(8,14,12,0.55) 45%, rgba(8,14,12,0.4) 100%)',
           }}
         />
       </div>
