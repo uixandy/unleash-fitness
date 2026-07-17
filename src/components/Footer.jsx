@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row gap-8 sm:items-center sm:justify-between">
         <div>
           <img
-            src="/assets/unleash-logo-dark.svg"
+            src="https://raw.githubusercontent.com/uixandy/unleash-fitness/main/public/assets/unleash-logo-dark.svg"
             alt="UNLEASH"
             className="h-7 w-auto"
           />

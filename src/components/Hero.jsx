@@ -2,12 +2,15 @@ import WaitlistForm from './WaitlistForm'
 
 const APP_URL = 'https://app.unleash.fitness'
 
+const HERO_IMG =
+  'https://raw.githubusercontent.com/uixandy/unleash-fitness/main/public/images/hero-gym.jpg'
+
 export default function Hero() {
   return (
     <section className="relative min-h-[100dvh] flex flex-col overflow-hidden">
       <div className="absolute inset-0 anim-fade-in">
         <img
-          src="/images/hero-gym.jpg"
+          src={HERO_IMG}
           alt=""
           className="w-full h-full object-cover opacity-40"
         />
@@ -22,7 +25,7 @@ export default function Hero() {
 
       <header className="relative z-10 flex items-center justify-between px-5 sm:px-8 py-5 max-w-6xl w-full mx-auto">
         <img
-          src="/assets/unleash-workout-tracker-logo-dark.svg"
+          src="https://raw.githubusercontent.com/uixandy/unleash-fitness/main/public/assets/unleash-workout-tracker-logo-dark.svg"
           alt="UNLEASH Workout Tracker"
           className="h-8 sm:h-10 w-auto"
         />

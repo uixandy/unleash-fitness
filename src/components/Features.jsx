@@ -41,7 +41,7 @@ export default function Features() {
           </div>
           <div className="rounded-[10px] overflow-hidden border border-[var(--border)] aspect-[4/3] max-h-72 lg:max-h-none">
             <img
-              src="/images/stock-gym.jpg"
+              src="https://raw.githubusercontent.com/uixandy/unleash-fitness/main/public/images/stock-gym.jpg"
               alt="Gym equipment"
               className="w-full h-full object-cover opacity-90"
             />

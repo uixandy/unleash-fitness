@@ -25,7 +25,7 @@ export default function ProTeaser() {
     >
       <div className="absolute inset-0 pointer-events-none opacity-20">
         <img
-          src="/images/lifestyle-barbell.jpg"
+          src="https://raw.githubusercontent.com/uixandy/unleash-fitness/main/public/images/lifestyle-barbell.jpg"
           alt=""
           className="w-full h-full object-cover"
         />

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { supabase } from '../lib/supabase'
 
 export default function WaitlistForm({ id = 'waitlist', compact = false }) {
   const [email, setEmail] = useState('')
@@ -8,7 +9,7 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
   async function handleSubmit(e) {
     e.preventDefault()
     const trimmed = email.trim().toLowerCase()
-    if (!trimmed || !trimmed.includes('@')) {
+    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
       setStatus('error')
       setMessage('Enter a valid email.')
       return
@@ -18,22 +19,52 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
     setMessage('')
 
     try {
+      // Prefer serverless API when configured; fall back to anon insert (RLS INSERT-only)
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: trimmed, source: 'marketing' }),
       })
-      const data = await res.json().catch(() => ({}))
 
-      if (res.status === 409 || data.code === 'duplicate') {
-        setStatus('duplicate')
-        setMessage("You're already on the list.")
+      if (res.status !== 404 && res.headers.get('content-type')?.includes('application/json')) {
+        const data = await res.json().catch(() => ({}))
+        if (res.status === 409 || data.code === 'duplicate') {
+          setStatus('duplicate')
+          setMessage("You're already on the list.")
+          return
+        }
+        if (res.ok) {
+          setStatus('success')
+          setMessage("You're on the list. We'll be in touch.")
+          setEmail('')
+          return
+        }
+        // If API is misconfigured (500), try client insert below
+        if (res.status !== 500) {
+          setStatus('error')
+          setMessage(data.error || 'Something went wrong. Try again.')
+          return
+        }
+      }
+
+      if (!supabase) {
+        setStatus('error')
+        setMessage('Waitlist is not configured yet.')
         return
       }
 
-      if (!res.ok) {
+      const { error } = await supabase
+        .from('marketing_waitlist')
+        .insert({ email: trimmed, source: 'marketing' })
+
+      if (error) {
+        if (error.code === '23505' || /duplicate|unique/i.test(error.message)) {
+          setStatus('duplicate')
+          setMessage("You're already on the list.")
+          return
+        }
         setStatus('error')
-        setMessage(data.error || 'Something went wrong. Try again.')
+        setMessage(error.message || 'Something went wrong. Try again.')
         return
       }
 
