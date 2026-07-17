@@ -855,8 +855,13 @@ h1, h2, h3 {
 
 /* ── Feature sticky scroll ── */
 .features-cinematic {
-  background: var(--bg-primary);
+  position: relative;
   border-top: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse 55% 50% at 18% 55%, rgba(255, 90, 31, 0.1), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 82% 40%, rgba(0, 168, 150, 0.07), transparent 55%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(255, 90, 31, 0.06), transparent 55%),
+    linear-gradient(180deg, var(--stage-mid) 0%, var(--bg-secondary) 45%, var(--stage-mid) 100%);
 }
 
 /* Intro → sticky: one continuous field, no hard band at the seam */
@@ -864,7 +869,7 @@ h1, h2, h3 {
   border-top: none;
   background:
     radial-gradient(ellipse 70% 45% at 50% 0%, var(--stage-glow), transparent 65%),
-    linear-gradient(180deg, var(--stage-mid) 0%, var(--bg-primary) 70%, var(--bg-primary) 100%);
+    linear-gradient(180deg, var(--stage-mid) 0%, transparent 75%);
 }
 
 .features-intro-inner {
@@ -879,6 +884,8 @@ h1, h2, h3 {
 }
 
 .features-body {
+  position: relative;
+  z-index: 1;
   padding-top: 0.5rem;
   padding-bottom: 5rem;
 }
@@ -1061,7 +1068,7 @@ h1, h2, h3 {
   flex-direction: column;
   justify-content: center;
   padding: 2rem 0;
-  opacity: 0.28;
+  opacity: 0.38;
   transform: translateY(10px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
@@ -1079,10 +1086,12 @@ h1, h2, h3 {
   transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 .features-step.is-active .features-step-card {
-  border-color: var(--border);
+  border-color: color-mix(in srgb, var(--border) 80%, var(--accent-orange));
   border-left-color: var(--accent-orange);
-  background: var(--bg-card);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.28),
+    0 0 32px rgba(255, 90, 31, 0.08);
 }
 
 .features-head {
