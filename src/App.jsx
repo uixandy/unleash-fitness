@@ -13,7 +13,7 @@ export default function App() {
   if (path === '/privacy') {
     return (
       <>
-        <SiteNav theme={theme} resolvedTheme={resolvedTheme} onSetTheme={setTheme} />
+        <SiteNav resolvedTheme={resolvedTheme} onSetTheme={setTheme} />
         <main className="max-w-2xl mx-auto px-5 py-16">
           <a href="/" className="btn-ghost text-sm mb-8 inline-flex">
             ← Back
@@ -36,7 +36,7 @@ export default function App() {
 
   return (
     <>
-      <SiteNav theme={theme} resolvedTheme={resolvedTheme} onSetTheme={setTheme} />
+      <SiteNav resolvedTheme={resolvedTheme} onSetTheme={setTheme} />
       <Hero />
       <ProductProof />
       <Features />

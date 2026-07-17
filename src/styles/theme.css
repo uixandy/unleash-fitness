@@ -83,7 +83,7 @@ html, body {
   color: var(--text-primary);
   font-family: 'IBM Plex Sans', sans-serif;
   min-height: 100dvh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 #root {
@@ -243,19 +243,35 @@ html, body {
   border-color: rgba(122, 160, 154, 0.35);
 }
 
-.theme-toggle--compact .segmented-btn {
-  padding: 6px 8px;
-  font-size: 11px;
-  min-height: 30px;
+.theme-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.theme-icon-btn:hover {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--text-primary) 6%, transparent);
 }
 
 .site-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background: color-mix(in srgb, var(--bg-primary) 78%, transparent);
+  background: color-mix(in srgb, var(--bg-primary) 82%, transparent);
   border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
 }
 .site-nav-inner {
@@ -266,22 +282,37 @@ html, body {
   max-width: 72rem;
   width: 100%;
   margin: 0 auto;
-  padding: 0.85rem 1.25rem;
+  padding: 0.75rem 1.25rem;
+  min-height: 64px;
 }
 @media (min-width: 640px) {
-  .site-nav-inner { padding: 0.95rem 2rem; }
+  .site-nav-inner { padding: 0.75rem 2rem; }
+}
+.site-nav-brand {
+  display: flex;
+  align-items: center;
+  min-width: 0;
 }
 .site-nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.35rem;
   flex-shrink: 0;
 }
 @media (max-width: 639px) {
-  .site-nav .btn-outline {
+  .site-nav .btn-primary {
     padding-left: 12px;
     padding-right: 12px;
   }
+}
+
+/* Fixed nav overlays the page — no body offset gap */
+.cinematic-hero,
+#product,
+#features,
+#pro,
+main {
+  scroll-margin-top: 72px;
 }
 
 .label {
@@ -515,10 +546,10 @@ h1, h2, h3 {
   max-width: 72rem;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 1.25rem 5rem;
+  padding: 5.5rem 1.25rem 5rem;
 }
 @media (min-width: 640px) {
-  .hero-body { padding: 2.5rem 2rem 6rem; }
+  .hero-body { padding: 6rem 2rem 6rem; }
 }
 @media (min-width: 1024px) {
   .hero-body {
