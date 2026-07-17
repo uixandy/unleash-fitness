@@ -5,8 +5,10 @@
  * Env (Vercel):
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY)
  *   RESEND_API_KEY
- *   RESEND_FROM          e.g. "UNLEASH <hello@unleash.fitness>"
- *   RESEND_NOTIFY_TO     optional — your inbox for signup pings
+ *   RESEND_FROM                 e.g. UNLEASH <hello@unleash.fitness>
+ *   RESEND_NOTIFY_TO            optional inbox for signup pings
+ *   RESEND_WAITLIST_SEGMENT_ID  Waitlist segment
+ *   RESEND_PRODUCT_TOPIC_ID     Product updates topic
  */
 
 function json(res, status, body) {
@@ -32,106 +34,107 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;')
 }
 
-async function sendResendEmail({ to, subject, html, text }) {
+async function resend(path, { method = 'GET', body } = {}) {
   const apiKey = process.env.RESEND_API_KEY
-  const from = process.env.RESEND_FROM || 'UNLEASH <onboarding@resend.dev>'
-  if (!apiKey) {
-    console.warn('RESEND_API_KEY not set — skipping email')
-    return { skipped: true }
-  }
+  if (!apiKey) return { skipped: true }
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
+  const res = await fetch(`https://api.resend.com${path}`, {
+    method,
     headers: {
       Authorization: `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      from,
-      to: Array.isArray(to) ? to : [to],
-      subject,
-      html,
-      text,
-    }),
+    body: body !== undefined ? JSON.stringify(body) : undefined,
   })
 
-  if (!res.ok) {
-    const errText = await res.text()
-    console.error('Resend send failed', res.status, errText)
-    return { ok: false, status: res.status, error: errText }
+  const text = await res.text()
+  let data = null
+  try {
+    data = text ? JSON.parse(text) : null
+  } catch {
+    data = { raw: text }
   }
 
-  const data = await res.json().catch(() => ({}))
-  return { ok: true, id: data.id }
+  return { ok: res.ok, status: res.status, data }
 }
 
-function welcomeEmail(firstName) {
-  const name = escapeHtml(firstName)
-  const subject = "You're on the UNLEASH waitlist"
-  const text = `Hey ${firstName},
+async function upsertWaitlistContact({ email, firstName }) {
+  const segmentId = process.env.RESEND_WAITLIST_SEGMENT_ID
+  const topicId = process.env.RESEND_PRODUCT_TOPIC_ID
 
-You're on the UNLEASH waitlist. We'll email you when launch and Pro open up.
+  const createBody = {
+    email,
+    first_name: firstName,
+    unsubscribed: false,
+  }
+  if (segmentId) createBody.segments = [{ id: segmentId }]
+  if (topicId) createBody.topics = [{ id: topicId, subscription: 'opt_in' }]
 
-No spam — just the real updates.
+  const created = await resend('/contacts', { method: 'POST', body: createBody })
+  if (created.skipped) return created
+  if (created.ok) return { ok: true, id: created.data?.id }
 
-— UNLEASH
-https://unleash.fitness`
+  // Already exists — refresh name + ensure segment/topic
+  const existing = await resend(`/contacts/${encodeURIComponent(email)}`)
+  const contactId = existing.data?.id
+  if (!contactId) {
+    console.error('Resend contact upsert failed', created.status, created.data)
+    return { ok: false }
+  }
 
-  const html = `<!DOCTYPE html>
-<html>
-<body style="margin:0;padding:0;background:#080E0C;color:#F0F0EE;font-family:Arial,Helvetica,sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#080E0C;padding:40px 16px;">
-    <tr>
-      <td align="center">
-        <table role="presentation" width="100%" style="max-width:520px;background:#0D1612;border:1px solid #243830;border-radius:12px;padding:32px 28px;">
-          <tr>
-            <td style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#00A896;padding-bottom:16px;">
-              UNLEASH
-            </td>
-          </tr>
-          <tr>
-            <td style="font-size:28px;font-weight:700;line-height:1.15;color:#F0F0EE;padding-bottom:12px;">
-              You're on the list, ${name}.
-            </td>
-          </tr>
-          <tr>
-            <td style="font-size:16px;line-height:1.6;color:#7AA09A;padding-bottom:24px;">
-              We'll email you when launch and Pro open up. No spam — just the real updates.
-            </td>
-          </tr>
-          <tr>
-            <td style="font-size:14px;line-height:1.5;color:#4E7870;">
-              — UNLEASH<br />
-              <a href="https://unleash.fitness" style="color:#FF5A1F;text-decoration:none;">unleash.fitness</a>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>`
+  await resend(`/contacts/${contactId}`, {
+    method: 'PATCH',
+    body: { first_name: firstName },
+  })
 
-  return { subject, html, text }
+  if (segmentId) {
+    await resend(`/contacts/${contactId}/segments/${segmentId}`, { method: 'POST' })
+  }
+  if (topicId) {
+    await resend(`/contacts/${contactId}/topics`, {
+      method: 'PATCH',
+      body: [{ id: topicId, subscription: 'opt_in' }],
+    })
+  }
+
+  return { ok: true, id: contactId }
 }
 
-function notifyEmail({ firstName, email, source }) {
-  const subject = `Waitlist: ${firstName} <${email}>`
-  const text = `New waitlist signup
+async function fireWaitlistJoined({ email, firstName, source }) {
+  return resend('/events/send', {
+    method: 'POST',
+    body: {
+      event: 'waitlist.joined',
+      email,
+      payload: {
+        first_name: firstName,
+        source,
+      },
+    },
+  })
+}
 
-Name: ${firstName}
-Email: ${email}
-Source: ${source}
-`
+async function notifyAndy({ firstName, email, source }) {
+  const apiKey = process.env.RESEND_API_KEY
+  const from = process.env.RESEND_FROM || 'UNLEASH <hello@unleash.fitness>'
+  const to = process.env.RESEND_NOTIFY_TO
+  if (!apiKey || !to) return { skipped: true }
 
-  const html = `<p><strong>New waitlist signup</strong></p>
+  return resend('/emails', {
+    method: 'POST',
+    body: {
+      from,
+      to: [to],
+      subject: `Waitlist: ${firstName} <${email}>`,
+      text: `New waitlist signup\n\nName: ${firstName}\nEmail: ${email}\nSource: ${source}\n`,
+      html: `<p><strong>New waitlist signup</strong></p>
 <ul>
   <li><strong>Name:</strong> ${escapeHtml(firstName)}</li>
   <li><strong>Email:</strong> ${escapeHtml(email)}</li>
   <li><strong>Source:</strong> ${escapeHtml(source)}</li>
-</ul>`
-
-  return { subject, html, text }
+</ul>`,
+    },
+  })
 }
 
 export default async function handler(req, res) {
@@ -198,28 +201,20 @@ export default async function handler(req, res) {
     return json(res, 500, { error: 'Could not join waitlist' })
   }
 
-  // Emails are best-effort — signup already succeeded
+  // Resend: contact → Waitlist segment → fire nurture event (welcome + drip)
   try {
-    const welcome = welcomeEmail(first_name)
-    await sendResendEmail({
-      to: email,
-      subject: welcome.subject,
-      html: welcome.html,
-      text: welcome.text,
+    await upsertWaitlistContact({ email, firstName: first_name })
+    const eventResult = await fireWaitlistJoined({
+      email,
+      firstName: first_name,
+      source,
     })
-
-    const notifyTo = process.env.RESEND_NOTIFY_TO
-    if (notifyTo) {
-      const notify = notifyEmail({ firstName: first_name, email, source })
-      await sendResendEmail({
-        to: notifyTo,
-        subject: notify.subject,
-        html: notify.html,
-        text: notify.text,
-      })
+    if (eventResult && !eventResult.skipped && !eventResult.ok) {
+      console.error('waitlist.joined event failed', eventResult.status, eventResult.data)
     }
+    await notifyAndy({ firstName: first_name, email, source })
   } catch (err) {
-    console.error('Waitlist email error', err)
+    console.error('Waitlist Resend error', err)
   }
 
   return json(res, 201, { ok: true })

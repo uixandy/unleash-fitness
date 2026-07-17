@@ -26,12 +26,15 @@ Requires Vercel env:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
-- `RESEND_API_KEY` — Resend API key
-- `RESEND_FROM` — e.g. `UNLEASH <hello@unleash.fitness>` (domain must be verified in Resend)
-- `RESEND_NOTIFY_TO` — optional inbox for signup pings
+- `RESEND_API_KEY`
+- `RESEND_FROM` — e.g. `UNLEASH <hello@unleash.fitness>`
+- `RESEND_NOTIFY_TO` — optional signup pings
+- `RESEND_WAITLIST_SEGMENT_ID`
+- `RESEND_PRODUCT_TOPIC_ID`
 
-On success: row in `marketing_waitlist`, welcome email to the joiner, optional notify to you.
-Resend failures do not fail the signup.
+On success: Supabase row + Resend contact on **Waitlist** + `waitlist.joined` event (nurture automation).
+
+Full email setup: [docs/RESEND.md](docs/RESEND.md). Re-seed Resend: `node scripts/setup-resend.mjs`.
 
 ## Deploy
 
