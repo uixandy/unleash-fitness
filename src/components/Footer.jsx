@@ -11,7 +11,7 @@ export default function Footer({ resolvedTheme = 'dark' }) {
           <div className="lg:col-span-5">
             <img src={logo} alt="UNLEASH" className="h-8 w-auto" />
             <p className="mt-4 text-sm text-[var(--text-secondary)] max-w-sm leading-relaxed">
-              Workout tracking for people who train. Waitlist open for launch and Pro.
+              Workout tracking for people who train. Waitlist open — unleash launch and Pro.
             </p>
             <div className="mt-6">
               <a href="#hero-waitlist" className="btn-primary text-sm">

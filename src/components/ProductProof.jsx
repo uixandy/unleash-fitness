@@ -1,5 +1,6 @@
 import PhoneFrame, { SHOTS } from './PhoneFrame'
 import SectionWatermark from './SectionWatermark'
+import ClawMark, { ScratchSlashes } from './ClawMark'
 import useReveal from '../hooks/useReveal'
 
 export default function ProductProof() {
@@ -8,6 +9,7 @@ export default function ProductProof() {
   return (
     <section id="product" className={`product-stage section-stage section-stage--clip section-pad ${className}`} ref={ref}>
       <SectionWatermark>PRODUCT</SectionWatermark>
+      <ClawMark variant="corner" className="product-claw" />
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
         <div className="reveal-up product-intro">
@@ -15,8 +17,11 @@ export default function ProductProof() {
           <h2 className="display-title">
             Train. Eat. Track.
             <br />
-            <span className="text-orange">No fluff.</span>
+            <span className="text-orange">Then unleash.</span>
           </h2>
+          <div className="brand-scratch-rule" aria-hidden="true">
+            <ScratchSlashes />
+          </div>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
             Real screens from UNLEASH — workouts, recipes, meal planner, and plans.
             Dark, spare, built to use between sets.

@@ -1,5 +1,6 @@
 import WaitlistForm from './WaitlistForm'
 import SectionWatermark from './SectionWatermark'
+import ClawMark, { ScratchSlashes } from './ClawMark'
 import useReveal from '../hooks/useReveal'
 
 const FREE = [
@@ -29,6 +30,8 @@ export default function ProTeaser() {
         <div className="pro-epic-shade" />
         <div className="pro-epic-beam" />
         <div className="hero-grain" />
+        <div className="hero-scratch-texture" />
+        <ClawMark variant="hero" className="pro-claw" />
       </div>
       <SectionWatermark position="right">PRO</SectionWatermark>
 
@@ -37,8 +40,11 @@ export default function ProTeaser() {
           <p className="section-label hero-label">Coming soon</p>
           <h2 className="pro-epic-title">
             Free feels complete.
-            <span className="pro-epic-title-accent">Pro goes further.</span>
+            <span className="pro-epic-title-accent">Unleash Pro.</span>
           </h2>
+          <div className="brand-scratch-rule brand-scratch-rule--on-dark" aria-hidden="true">
+            <ScratchSlashes />
+          </div>
           <p className="pro-epic-lede">
             Advanced programming stays free — including manual recipes and meal planning.
             Pro unlocks library breadth, longer analytics, and AI recipe import. Price isn’t

@@ -543,6 +543,104 @@ h1, h2, h3 {
   animation: grainShift 4s steps(2) infinite;
   mix-blend-mode: overlay;
 }
+.hero-scratch-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image:
+    repeating-linear-gradient(
+      -18deg,
+      transparent 0,
+      transparent 11px,
+      rgba(255, 90, 31, 0.04) 11px,
+      rgba(255, 90, 31, 0.04) 12px
+    ),
+    repeating-linear-gradient(
+      -22deg,
+      transparent 0,
+      transparent 31px,
+      rgba(255, 255, 255, 0.018) 31px,
+      rgba(255, 255, 255, 0.018) 32px
+    );
+  mix-blend-mode: soft-light;
+}
+
+/* ── Brand claw + scratches ── */
+.claw-mark {
+  color: var(--accent-orange);
+  display: block;
+  pointer-events: none;
+}
+.claw-mark--hero {
+  position: absolute;
+  width: clamp(220px, 38vw, 420px);
+  height: auto;
+  opacity: 0.22;
+  z-index: 1;
+  filter: drop-shadow(0 0 28px rgba(255, 90, 31, 0.25));
+}
+.claw-mark--corner {
+  position: absolute;
+  width: clamp(120px, 18vw, 200px);
+  height: auto;
+  opacity: 0.16;
+  z-index: 0;
+  color: var(--accent-orange);
+}
+.claw-mark--inline {
+  width: 1.75rem;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.hero-claw {
+  right: -4%;
+  top: 12%;
+  transform: rotate(-8deg);
+}
+.product-claw {
+  right: -2%;
+  top: 8%;
+  transform: rotate(12deg);
+}
+.features-claw {
+  left: -3%;
+  bottom: 6%;
+  transform: rotate(-14deg) scaleX(-1);
+}
+.pro-claw {
+  left: -6%;
+  bottom: 8%;
+  transform: rotate(18deg) scaleX(-1);
+  opacity: 0.28;
+}
+
+.scratch-slashes {
+  width: 4.5rem;
+  height: auto;
+  color: var(--accent-orange);
+  display: block;
+}
+.brand-scratch-rule {
+  margin: 1rem 0 0;
+}
+.brand-scratch-rule--on-dark .scratch-slashes {
+  filter: drop-shadow(0 0 10px rgba(255, 90, 31, 0.35));
+}
+
+.hero-rule {
+  width: auto;
+  height: auto;
+  background: none;
+  margin: 0 0 1.25rem;
+  border-radius: 0;
+}
+.hero-rule .scratch-slashes {
+  width: 5rem;
+  filter: drop-shadow(0 0 12px rgba(255, 90, 31, 0.4));
+}
 
 .hero-body {
   position: relative;
@@ -581,13 +679,6 @@ h1, h2, h3 {
   display: block;
   color: var(--accent-orange);
   text-shadow: 0 0 40px rgba(255, 90, 31, 0.35);
-}
-.hero-rule {
-  width: 4rem;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-orange), transparent);
-  margin: 0 0 1.25rem;
-  border-radius: 2px;
 }
 
 .hero-cta-panel {

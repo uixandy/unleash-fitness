@@ -1,5 +1,6 @@
 import WaitlistForm from './WaitlistForm'
 import PhoneFrame from './PhoneFrame'
+import ClawMark, { ScratchSlashes } from './ClawMark'
 
 const HERO_PHONE = {
   key: 'workout',
@@ -15,6 +16,8 @@ export default function Hero() {
         <div className="hero-stage-shade" />
         <div className="hero-stage-glow" />
         <div className="hero-grain" />
+        <div className="hero-scratch-texture" />
+        <ClawMark variant="hero" className="hero-claw" />
       </div>
 
       <div className="hero-body">
@@ -24,12 +27,14 @@ export default function Hero() {
             <span className="hero-title-line">Train.</span>
             <span className="hero-title-line">Eat.</span>
             <span className="hero-title-line">Progress.</span>
-            <span className="hero-title-accent">One place.</span>
+            <span className="hero-title-accent">Unleash it.</span>
           </h1>
-          <div className="hero-rule anim-fade-up-delay-1" aria-hidden="true" />
+          <div className="hero-rule anim-fade-up-delay-1" aria-hidden="true">
+            <ScratchSlashes />
+          </div>
           <p className="hero-lede anim-fade-up-delay-2">
             Sessions, recipes, meal planning, and charts — one tracker for people who
-            actually lift. Join the waitlist for launch and Pro.
+            actually lift. The work stays in. The fluff stays out.
           </p>
 
           <div className="hero-cta-panel anim-fade-up-delay-2">
