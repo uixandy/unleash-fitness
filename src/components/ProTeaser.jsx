@@ -22,80 +22,63 @@ export default function ProTeaser() {
   const { ref, className } = useReveal()
 
   return (
-    <section id="pro" className={`pro-cinematic section-pad ${className}`} ref={ref}>
-      <div className="pro-stage" aria-hidden="true">
-        <img src="/images/lifestyle-barbell.jpg" alt="" className="pro-stage-img" />
-        <div className="pro-stage-shade" />
-      </div>
-      <div className="pro-watermark" aria-hidden="true">
-        PRO
+    <section id="pro" className={`pro-epic ${className}`} ref={ref}>
+      <div className="pro-epic-stage" aria-hidden="true">
+        <img src="/images/lifestyle-barbell.jpg" alt="" className="pro-epic-img" />
+        <div className="pro-epic-shade" />
+        <div className="pro-epic-beam" />
+        <div className="hero-grain" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-5 sm:px-8 z-10">
-        <div className="reveal-up max-w-2xl">
+      <div className="pro-epic-inner">
+        <header className="pro-epic-head reveal-up">
           <p className="section-label hero-label">Coming soon</p>
-          <h2 className="display-title">
+          <h2 className="pro-epic-title">
             Free feels complete.
-            <br />
-            <span className="text-orange">Pro goes further.</span>
+            <span className="pro-epic-title-accent">Pro goes further.</span>
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-[var(--text-secondary)] max-w-xl">
+          <p className="pro-epic-lede">
             Advanced programming stays free. Pro unlocks library breadth, longer analytics,
-            and AI. Pricing isn’t set — join the waitlist to hear first.
+            and AI. Price isn’t set — get on the list first.
           </p>
-        </div>
+        </header>
 
-        <div className="tier-compare mt-14">
-          <div className="tier-panel reveal-up" style={{ transitionDelay: '100ms' }}>
-            <div className="tier-head">
-              <p className="label" style={{ marginBottom: 0 }}>
-                Free
-              </p>
-              <p className="font-display text-2xl mt-2">Included</p>
-              <p className="mt-1 text-sm text-[var(--text-muted)]">
-                At launch — no paywall on the basics
-              </p>
+        <div className="pro-arena">
+          <article className="pro-card pro-card--free reveal-up" style={{ transitionDelay: '80ms' }}>
+            <div className="pro-card-top">
+              <span className="pro-pill pro-pill--teal">Free</span>
+              <h3>Included</h3>
+              <p>At launch — no paywall on the basics</p>
             </div>
-            <ul className="tier-list">
+            <ul className="pro-card-list">
               {FREE.map((item) => (
-                <li key={item}>
-                  <span className="tier-mark tier-mark--teal" aria-hidden="true" />
-                  {item}
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
-          </div>
+          </article>
 
-          <div
-            className="tier-panel tier-panel--pro reveal-up"
-            style={{ transitionDelay: '180ms' }}
-          >
-            <div className="tier-head">
-              <p className="label" style={{ marginBottom: 0, color: 'var(--accent-orange)' }}>
-                Pro
-              </p>
-              <p className="font-display text-2xl mt-2">Price TBD</p>
-              <p className="mt-1 text-sm text-[var(--text-muted)]">
-                Honest placeholder — no fake checkout
-              </p>
+          <article className="pro-card pro-card--pro reveal-scale" style={{ transitionDelay: '140ms' }}>
+            <div className="pro-card-glow" aria-hidden="true" />
+            <div className="pro-card-top">
+              <div className="pro-card-top-row">
+                <span className="pro-pill pro-pill--orange">Pro</span>
+                <span className="pro-badge">Waitlist</span>
+              </div>
+              <h3>Price TBD</h3>
+              <p>Honest placeholder — no fake checkout</p>
             </div>
-            <ul className="tier-list">
+            <ul className="pro-card-list">
               {PRO.map((item) => (
-                <li key={item}>
-                  <span className="tier-mark tier-mark--orange" aria-hidden="true" />
-                  {item}
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
-          </div>
-        </div>
-
-        <div className="waitlist-block reveal-up mt-14" style={{ transitionDelay: '220ms' }}>
-          <p className="label">Waitlist</p>
-          <p className="mb-4 text-sm text-[var(--text-secondary)] leading-relaxed">
-            One email for launch and Pro. No spam, no sales drip.
-          </p>
-          <WaitlistForm id="pro-waitlist" />
+            <div className="pro-card-cta">
+              <p className="pro-card-cta-copy">
+                One email for launch and Pro. No spam.
+              </p>
+              <WaitlistForm id="pro-waitlist" />
+            </div>
+          </article>
         </div>
       </div>
     </section>
