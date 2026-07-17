@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import PhoneFrame from './PhoneFrame'
 import SectionWatermark from './SectionWatermark'
-import ClawMark, { ScratchSlashes } from './ClawMark'
+import ClawMark from './ClawMark'
 import useReveal from '../hooks/useReveal'
 
 const STEPS = [
@@ -159,12 +159,12 @@ export default function Features() {
           <div className="reveal-up features-head">
             <p className="section-label">Features</p>
             <h2 className="display-title max-w-3xl">
-              Train and eat.
-              <span className="text-orange"> One tracker.</span>
+              Train and eat.{' '}
+              <span className="brand-lockup text-orange">
+                <ClawMark variant="accent" className="brand-lockup-claw" />
+                <span>One tracker.</span>
+              </span>
             </h2>
-            <div className="brand-scratch-rule" aria-hidden="true">
-              <ScratchSlashes />
-            </div>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
               {sticky
                 ? 'Scroll the story — the screen keeps pace. Logging, recipes, meal planner, and programming in one pass.'

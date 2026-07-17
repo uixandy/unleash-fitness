@@ -33,7 +33,7 @@ export default function ClawMark({
   )
 }
 
-/** Headline rule — same official scratch, compact */
+/** Headline accent — same mark, logo-locked next to “Unleash…” lines */
 export function ScratchSlashes({ className = '' }) {
-  return <ClawMark variant="rule" className={className} />
+  return <ClawMark variant="accent" className={className} />
 }

@@ -1,6 +1,6 @@
 import PhoneFrame, { SHOTS } from './PhoneFrame'
 import SectionWatermark from './SectionWatermark'
-import ClawMark, { ScratchSlashes } from './ClawMark'
+import ClawMark from './ClawMark'
 import useReveal from '../hooks/useReveal'
 
 export default function ProductProof() {
@@ -17,11 +17,11 @@ export default function ProductProof() {
           <h2 className="display-title">
             Train. Eat. Track.
             <br />
-            <span className="text-orange">Then unleash.</span>
+            <span className="brand-lockup text-orange">
+              <ClawMark variant="accent" className="brand-lockup-claw" />
+              <span>Then unleash.</span>
+            </span>
           </h2>
-          <div className="brand-scratch-rule" aria-hidden="true">
-            <ScratchSlashes />
-          </div>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
             Real screens from UNLEASH — workouts, recipes, meal planner, and plans.
             Dark, spare, built to use between sets.

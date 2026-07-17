@@ -1,6 +1,6 @@
 import WaitlistForm from './WaitlistForm'
 import PhoneFrame from './PhoneFrame'
-import ClawMark, { ScratchSlashes } from './ClawMark'
+import ClawMark from './ClawMark'
 
 const HERO_PHONE = {
   key: 'workout',
@@ -16,22 +16,21 @@ export default function Hero() {
         <div className="hero-stage-shade" />
         <div className="hero-stage-glow" />
         <div className="hero-grain" />
-        <div className="hero-scratch-texture" />
-        <ClawMark variant="hero" className="hero-claw" />
       </div>
 
       <div className="hero-body">
         <div className="hero-copy">
+          <ClawMark variant="hero" className="hero-claw" />
           <p className="section-label hero-label anim-fade-up">Coming soon</p>
           <h1 className="hero-title anim-fade-up-delay-1">
             <span className="hero-title-line">Train.</span>
             <span className="hero-title-line">Eat.</span>
             <span className="hero-title-line">Progress.</span>
-            <span className="hero-title-accent">Unleash it.</span>
+            <span className="hero-title-accent brand-lockup">
+              <ClawMark variant="accent" className="brand-lockup-claw" />
+              <span>Unleash it.</span>
+            </span>
           </h1>
-          <div className="hero-rule anim-fade-up-delay-1" aria-hidden="true">
-            <ScratchSlashes />
-          </div>
           <p className="hero-lede anim-fade-up-delay-2">
             Sessions, recipes, meal planning, and charts — one tracker for people who
             actually lift. The work stays in. The fluff stays out.

@@ -543,105 +543,101 @@ h1, h2, h3 {
   animation: grainShift 4s steps(2) infinite;
   mix-blend-mode: overlay;
 }
-.hero-scratch-texture {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.14;
-  background-image:
-    repeating-linear-gradient(
-      -18deg,
-      transparent 0,
-      transparent 11px,
-      rgba(255, 90, 31, 0.04) 11px,
-      rgba(255, 90, 31, 0.04) 12px
-    ),
-    repeating-linear-gradient(
-      -22deg,
-      transparent 0,
-      transparent 31px,
-      rgba(255, 255, 255, 0.018) 31px,
-      rgba(255, 255, 255, 0.018) 32px
-    );
-  mix-blend-mode: soft-light;
-}
-
-/* ── Brand claw + scratches (official unleash-scratch-only mark) ── */
+/* ── Brand claw (official unleash-scratch-only, logo angle ~-43°) ── */
 .claw-mark {
   color: var(--accent-orange);
   display: block;
   pointer-events: none;
+  flex-shrink: 0;
 }
 .claw-mark--hero {
   position: absolute;
-  width: clamp(140px, 22vw, 260px);
+  width: clamp(160px, 26vw, 280px);
   height: auto;
-  opacity: 0.28;
-  z-index: 1;
-  filter: drop-shadow(0 0 28px rgba(255, 90, 31, 0.3));
+  opacity: 0.34;
+  z-index: 0;
+  filter: drop-shadow(0 0 32px rgba(255, 90, 31, 0.28));
+  -webkit-mask-image: linear-gradient(160deg, #000 35%, transparent 92%);
+  mask-image: linear-gradient(160deg, #000 35%, transparent 92%);
 }
 .claw-mark--corner {
   position: absolute;
-  width: clamp(90px, 14vw, 160px);
+  width: clamp(100px, 15vw, 170px);
   height: auto;
-  opacity: 0.2;
+  opacity: 0.18;
   z-index: 0;
-  color: var(--accent-orange);
+  filter: drop-shadow(0 0 20px rgba(255, 90, 31, 0.18));
+  -webkit-mask-image: linear-gradient(150deg, #000 30%, transparent 88%);
+  mask-image: linear-gradient(150deg, #000 30%, transparent 88%);
 }
-.claw-mark--inline {
-  width: 2rem;
+.claw-mark--inline,
+.claw-mark--accent {
+  width: 1em;
   height: auto;
-  display: inline-block;
-  vertical-align: middle;
-}
-.claw-mark--rule {
-  width: 2.75rem;
-  height: auto;
-  color: var(--accent-orange);
   display: block;
-  transform: rotate(-12deg);
-  filter: drop-shadow(0 0 10px rgba(255, 90, 31, 0.35));
 }
 
-.hero-claw {
-  right: -2%;
-  top: 8%;
-  transform: rotate(-6deg);
+/* Lockup: claw left of “Unleash…” — same relationship as the logo */
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  position: relative;
 }
+.brand-lockup-claw {
+  width: 0.72em;
+  height: auto;
+  transform: rotate(-43deg);
+  transform-origin: center center;
+  filter: drop-shadow(0 0 14px rgba(255, 90, 31, 0.45));
+  margin-top: -0.06em;
+}
+.hero-title-accent.brand-lockup,
+.pro-epic-title-accent.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+}
+
+.hero-copy {
+  position: relative;
+}
+.hero-claw {
+  left: -0.5rem;
+  top: 18%;
+  transform: rotate(-43deg);
+  opacity: 0.22;
+  width: clamp(140px, 28vw, 240px);
+  z-index: 0;
+}
+.hero-copy > :not(.hero-claw) {
+  position: relative;
+  z-index: 1;
+}
+
 .product-claw {
-  right: -1%;
-  top: 4%;
-  transform: rotate(8deg);
+  right: 2%;
+  top: 10%;
+  transform: rotate(-43deg);
 }
 .features-claw {
-  left: -2%;
-  bottom: 4%;
-  transform: rotate(-10deg) scaleX(-1);
+  left: 1%;
+  bottom: 8%;
+  transform: rotate(-43deg) scaleX(-1);
 }
 .pro-claw {
-  left: -4%;
-  bottom: 4%;
-  transform: rotate(14deg) scaleX(-1);
-  opacity: 0.32;
+  left: 4%;
+  bottom: 10%;
+  transform: rotate(-43deg) scaleX(-1);
+  opacity: 0.3;
+  width: clamp(150px, 24vw, 260px);
 }
 
-.brand-scratch-rule {
-  margin: 1rem 0 0;
+[data-theme='light'] .claw-mark--corner {
+  opacity: 0.14;
 }
-.brand-scratch-rule--on-dark .claw-mark--rule {
-  filter: drop-shadow(0 0 12px rgba(255, 90, 31, 0.45));
-}
-
-.hero-rule {
-  width: auto;
-  height: auto;
-  background: none;
-  margin: 0 0 1.25rem;
-  border-radius: 0;
-}
-.hero-rule .claw-mark--rule {
-  width: 3.25rem;
-  filter: drop-shadow(0 0 14px rgba(255, 90, 31, 0.5));
+[data-theme='light'] .brand-lockup-claw {
+  filter: drop-shadow(0 0 8px rgba(232, 78, 23, 0.25));
 }
 
 .hero-body {
