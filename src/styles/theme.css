@@ -566,7 +566,7 @@ h1, h2, h3 {
   mix-blend-mode: soft-light;
 }
 
-/* ── Brand claw + scratches ── */
+/* ── Brand claw + scratches (official unleash-scratch-only mark) ── */
 .claw-mark {
   color: var(--accent-orange);
   display: block;
@@ -574,60 +574,62 @@ h1, h2, h3 {
 }
 .claw-mark--hero {
   position: absolute;
-  width: clamp(220px, 38vw, 420px);
+  width: clamp(140px, 22vw, 260px);
   height: auto;
-  opacity: 0.22;
+  opacity: 0.28;
   z-index: 1;
-  filter: drop-shadow(0 0 28px rgba(255, 90, 31, 0.25));
+  filter: drop-shadow(0 0 28px rgba(255, 90, 31, 0.3));
 }
 .claw-mark--corner {
   position: absolute;
-  width: clamp(120px, 18vw, 200px);
+  width: clamp(90px, 14vw, 160px);
   height: auto;
-  opacity: 0.16;
+  opacity: 0.2;
   z-index: 0;
   color: var(--accent-orange);
 }
 .claw-mark--inline {
-  width: 1.75rem;
+  width: 2rem;
   height: auto;
   display: inline-block;
   vertical-align: middle;
 }
-
-.hero-claw {
-  right: -4%;
-  top: 12%;
-  transform: rotate(-8deg);
-}
-.product-claw {
-  right: -2%;
-  top: 8%;
-  transform: rotate(12deg);
-}
-.features-claw {
-  left: -3%;
-  bottom: 6%;
-  transform: rotate(-14deg) scaleX(-1);
-}
-.pro-claw {
-  left: -6%;
-  bottom: 8%;
-  transform: rotate(18deg) scaleX(-1);
-  opacity: 0.28;
-}
-
-.scratch-slashes {
-  width: 4.5rem;
+.claw-mark--rule {
+  width: 2.75rem;
   height: auto;
   color: var(--accent-orange);
   display: block;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 0 10px rgba(255, 90, 31, 0.35));
 }
+
+.hero-claw {
+  right: -2%;
+  top: 8%;
+  transform: rotate(-6deg);
+}
+.product-claw {
+  right: -1%;
+  top: 4%;
+  transform: rotate(8deg);
+}
+.features-claw {
+  left: -2%;
+  bottom: 4%;
+  transform: rotate(-10deg) scaleX(-1);
+}
+.pro-claw {
+  left: -4%;
+  bottom: 4%;
+  transform: rotate(14deg) scaleX(-1);
+  opacity: 0.32;
+}
+
 .brand-scratch-rule {
   margin: 1rem 0 0;
 }
-.brand-scratch-rule--on-dark .scratch-slashes {
-  filter: drop-shadow(0 0 10px rgba(255, 90, 31, 0.35));
+.brand-scratch-rule--on-dark .claw-mark--rule {
+  filter: drop-shadow(0 0 12px rgba(255, 90, 31, 0.45));
 }
 
 .hero-rule {
@@ -637,9 +639,9 @@ h1, h2, h3 {
   margin: 0 0 1.25rem;
   border-radius: 0;
 }
-.hero-rule .scratch-slashes {
-  width: 5rem;
-  filter: drop-shadow(0 0 12px rgba(255, 90, 31, 0.4));
+.hero-rule .claw-mark--rule {
+  width: 3.25rem;
+  filter: drop-shadow(0 0 14px rgba(255, 90, 31, 0.5));
 }
 
 .hero-body {
