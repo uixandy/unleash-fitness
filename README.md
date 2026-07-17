@@ -20,12 +20,18 @@ See [public/screenshots/README.md](public/screenshots/README.md).
 
 ## Waitlist API
 
-`POST /api/waitlist` with `{ "email": "…", "source": "marketing" }`.
+`POST /api/waitlist` with `{ "email": "…", "first_name": "…", "source": "marketing" }`.
 
 Requires Vercel env:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `RESEND_API_KEY` — Resend API key
+- `RESEND_FROM` — e.g. `UNLEASH <hello@unleash.fitness>` (domain must be verified in Resend)
+- `RESEND_NOTIFY_TO` — optional inbox for signup pings
+
+On success: row in `marketing_waitlist`, welcome email to the joiner, optional notify to you.
+Resend failures do not fail the signup.
 
 ## Deploy
 
