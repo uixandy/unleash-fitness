@@ -1,16 +1,22 @@
 # Screenshots
 
-Drop production captures here (portrait, dark mode preferred):
+Production captures from the UNLEASH app (portrait, dark mode).
+
+## Product proof (shown on site)
 
 | File | Screen |
 |------|--------|
-| `workout.png` | Workout home or active session |
-| `progress.png` | Progress chart |
-| `nutrition.png` | Nutrition goals or recipes |
+| `workout.png` | Active workout session (Full Body) |
+| `nutrition.png` | Nutrition Goals |
+| `plans.png` | Plans (Full Body plan card) |
 
-Optional motion (used instead of PNG when present):
+## Extra assets (available, not in the 3-up proof)
 
-- `workout.gif` / `progress.gif` / `nutrition.gif`
-- or `.mp4` with the same base names (update `PhoneFrame.jsx` if you prefer video)
+| File | Screen |
+|------|--------|
+| `library.png` | Exercise library |
+| `nutrition-planner.png` | Nutrition Planner |
+| `nutrition-recipes.png` | Nutrition Recipes |
+| `nutrition-goals-alt.png` | Nutrition Goals (alternate crop) |
 
-Phone frames on the site auto-detect these files.
+Paths are local (`/screenshots/...`) so Design Mode and Vercel builds pick them up without CDN.

@@ -1,66 +1,28 @@
-import { useState, useEffect } from 'react'
-
 /**
- * Drop screenshots into public/screenshots/:
- *   workout.png | progress.png | nutrition.png
- * Optional GIFs/videos: workout.gif, progress.gif, nutrition.gif (or .mp4)
+ * Product proof screenshots in public/screenshots/:
+ *   workout.png | nutrition.png | plans.png
+ * Extra assets: library.png, nutrition-planner.png, nutrition-recipes.png
  */
 const SHOTS = [
   {
     key: 'workout',
     label: 'Workout',
     src: '/screenshots/workout.png',
-    video: '/screenshots/workout.gif',
-    hint: 'Drop workout.png here',
-  },
-  {
-    key: 'progress',
-    label: 'Progress',
-    src: '/screenshots/progress.png',
-    video: '/screenshots/progress.gif',
-    hint: 'Drop progress.png here',
   },
   {
     key: 'nutrition',
     label: 'Nutrition',
     src: '/screenshots/nutrition.png',
-    video: '/screenshots/nutrition.gif',
-    hint: 'Drop nutrition.png here',
+  },
+  {
+    key: 'plans',
+    label: 'Plans',
+    src: '/screenshots/plans.png',
   },
 ]
 
-function useImageExists(src) {
-  const [exists, setExists] = useState(false)
-
-  useEffect(() => {
-    let cancelled = false
-    const img = new Image()
-    img.onload = () => { if (!cancelled) setExists(true) }
-    img.onerror = () => { if (!cancelled) setExists(false) }
-    img.src = src
-    return () => { cancelled = true }
-  }, [src])
-
-  return exists
-}
-
 function PhoneScreen({ shot }) {
-  const hasImg = useImageExists(shot.src)
-  const hasGif = useImageExists(shot.video)
-
-  if (hasGif) {
-    return <img src={shot.video} alt={`${shot.label} demo`} />
-  }
-  if (hasImg) {
-    return <img src={shot.src} alt={`UNLEASH ${shot.label} screen`} />
-  }
-
-  return (
-    <div className="phone-placeholder">
-      <span>{shot.label}</span>
-      <small>{shot.hint}</small>
-    </div>
-  )
+  return <img src={shot.src} alt={`UNLEASH ${shot.label} screen`} />
 }
 
 export default function PhoneFrame({ shot, className = '' }) {
