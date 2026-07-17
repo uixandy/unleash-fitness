@@ -812,47 +812,54 @@ h1, h2, h3 {
 
 .features-phone-glow {
   position: absolute;
-  width: 85%;
-  height: 70%;
-  top: 12%;
+  width: 70%;
+  height: 55%;
+  top: 18%;
   left: 50%;
   translate: -50% 0;
-  background: radial-gradient(ellipse, rgba(255, 90, 31, 0.28), transparent 68%);
-  filter: blur(28px);
+  background: radial-gradient(ellipse, rgba(255, 90, 31, 0.22), transparent 70%);
+  filter: blur(32px);
   pointer-events: none;
+  z-index: 0;
   animation: pulseGlow 5s ease-in-out infinite;
 }
 
-.features-phone-layers {
+.features-phone-swap {
   position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 300px;
-  min-height: 580px;
-  margin: 0 auto;
+  max-width: 260px;
+  animation: featuresPhoneIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.features-sticky-phone {
+  max-width: 100%;
+}
+.features-sticky-phone .phone-screen {
+  /* Keep full bezel; screenshots fill without spilling past the frame */
+  overflow: hidden;
+  isolation: isolate;
+}
+.features-sticky-phone .phone-screen img {
+  object-fit: cover;
+  object-position: top center;
 }
 
-.features-phone-layer {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(16px) scale(0.96);
-  transition:
-    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  z-index: 0;
-}
-.features-phone-layer.is-active {
-  opacity: 1;
-  transform: none;
-  z-index: 1;
+@keyframes featuresPhoneIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .features-phone-meta {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 280px;
+  max-width: 260px;
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
@@ -877,9 +884,8 @@ h1, h2, h3 {
 .features-phone-progress i {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-orange), #FF8A55);
+  background: var(--accent-orange);
   border-radius: inherit;
-  box-shadow: 0 0 12px rgba(255, 90, 31, 0.45);
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -916,7 +922,7 @@ h1, h2, h3 {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-left: 1.25rem;
+  padding-left: 1.5rem;
 }
 
 .features-scroll-rail {
@@ -935,8 +941,7 @@ h1, h2, h3 {
   top: 0;
   width: 100%;
   height: var(--features-progress, 25%);
-  background: linear-gradient(180deg, var(--accent-orange), transparent);
-  box-shadow: 0 0 14px rgba(255, 90, 31, 0.35);
+  background: var(--accent-orange);
   transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -956,19 +961,18 @@ h1, h2, h3 {
 }
 
 .features-step-card {
-  padding: 1.5rem 1.35rem;
-  border-radius: 18px;
+  padding: 1.5rem 1.5rem 1.5rem 1.35rem;
+  border-radius: 16px;
   border: 1px solid transparent;
-  transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+  border-left: 3px solid transparent;
+  background: transparent;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 .features-step.is-active .features-step-card {
-  border-color: color-mix(in srgb, var(--accent-orange) 35%, var(--border));
-  background: color-mix(in srgb, var(--bg-card) 72%, transparent);
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.12),
-    0 0 0 1px color-mix(in srgb, var(--accent-orange) 12%, transparent),
-    inset 3px 0 0 var(--accent-orange);
-  backdrop-filter: blur(10px);
+  border-color: var(--border);
+  border-left-color: var(--accent-orange);
+  background: var(--bg-card);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
 }
 
 .features-head {
@@ -1052,19 +1056,16 @@ h1, h2, h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .features-phone-layer,
+  .features-phone-swap,
   .features-step,
   .features-phone-progress i,
   .features-scroll-rail-fill {
     animation: none !important;
     transition: none !important;
   }
-  .features-phone-layer {
-    opacity: 0 !important;
-    transform: none !important;
-  }
-  .features-phone-layer.is-active {
+  .features-phone-swap {
     opacity: 1 !important;
+    transform: none !important;
   }
   .features-step {
     opacity: 1 !important;

@@ -139,15 +139,8 @@ export default function Features() {
               <div className="features-scroll-phone-sticky">
                 <div className="features-phone-stage">
                   <div className="features-phone-glow" aria-hidden="true" />
-                  <div className="features-phone-layers">
-                    {STEPS.map((step, i) => (
-                      <div
-                        key={step.key}
-                        className={`features-phone-layer ${i === active ? 'is-active' : ''}`}
-                      >
-                        <PhoneFrame shot={step.shot} size="lg" />
-                      </div>
-                    ))}
+                  <div className="features-phone-swap" key={STEPS[active].key}>
+                    <PhoneFrame shot={STEPS[active].shot} size="md" className="features-sticky-phone" />
                   </div>
                   <div className="features-phone-meta">
                     <span className="features-phone-count">
