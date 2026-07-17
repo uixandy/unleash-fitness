@@ -799,7 +799,19 @@ h1, h2, h3 {
 }
 
 /* ── Product constellation ── */
-.product-intro { max-width: 40rem; }
+.product-intro {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.product-intro .brand-lockup {
+  justify-content: center;
+}
+.product-intro p {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .phone-constellation {
   display: grid;
@@ -1068,6 +1080,17 @@ h1, h2, h3 {
 .features-head {
   position: relative;
   z-index: 1;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.features-head .brand-lockup {
+  justify-content: center;
+}
+.features-head p {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .features-stack {
