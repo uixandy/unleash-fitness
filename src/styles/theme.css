@@ -732,65 +732,40 @@ h1, h2, h3 {
 
 .features-scroll {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-@media (min-width: 900px) {
-  .features-scroll {
-    grid-template-columns: minmax(280px, 0.9fr) 1.1fr;
-    gap: 3.5rem;
-  }
+  grid-template-columns: minmax(260px, 0.85fr) 1.15fr;
+  gap: 3rem;
+  align-items: stretch;
 }
 
 .features-scroll-phone {
-  display: none;
-}
-@media (min-width: 900px) {
-  .features-scroll-phone {
-    display: block;
-    position: sticky;
-    top: 12vh;
-    align-self: start;
-  }
+  min-height: 100%;
 }
 
-.features-phone-stage {
+.features-scroll-phone-sticky {
+  position: sticky;
+  top: 88px;
+  width: 100%;
+}
+
+.features-phone-card {
   position: relative;
-  min-height: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem 0;
 }
-.features-phone-layer {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(18px) scale(0.94);
-  transition:
-    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  z-index: 0;
-}
-.features-phone-layer.is-active {
-  opacity: 1;
-  transform: none;
-  z-index: 1;
-}
-.features-phone-layer .phone-frame {
+
+.features-phone-swap {
   position: relative;
   z-index: 1;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .features-scroll-dots {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
 }
 .features-scroll-dot {
   appearance: none;
@@ -819,35 +794,32 @@ h1, h2, h3 {
   flex-direction: column;
 }
 .features-step {
-  padding: 2.5rem 0;
-  border-bottom: 1px solid var(--border);
-  opacity: 0.42;
-  transition: opacity 0.35s ease;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+  opacity: 0.3;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
-.features-step:last-child { border-bottom: none; }
-.features-step.is-active { opacity: 1; }
-
-@media (min-width: 900px) {
-  .features-step {
-    min-height: 72vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 3rem 0;
-    border-bottom: none;
-    opacity: 0.28;
-    transform: translateY(8px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-  .features-step.is-active {
-    opacity: 1;
-    transform: none;
-  }
-  .features-step-mobile-phone { display: none; }
+.features-step.is-active {
+  opacity: 1;
+  transform: none;
 }
 
-.features-step-mobile-phone {
-  margin: 0 0 1.5rem;
+.features-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.features-stack-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+.features-stack-phone {
   display: flex;
   justify-content: center;
 }
@@ -912,25 +884,12 @@ h1, h2, h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .features-phone-layer,
+  .features-phone-swap,
   .features-step {
+    animation: none !important;
     transition: none !important;
-  }
-  .features-phone-layer {
-    position: relative;
     opacity: 1 !important;
     transform: none !important;
-    inset: auto;
-  }
-  .features-phone-stage {
-    display: none;
-  }
-  .features-scroll-phone { display: none !important; }
-  .features-step-mobile-phone { display: flex !important; }
-  .features-step {
-    opacity: 1 !important;
-    transform: none !important;
-    min-height: 0 !important;
   }
 }
 

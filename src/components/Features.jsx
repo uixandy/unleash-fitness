@@ -33,45 +33,62 @@ const STEPS = [
   },
 ]
 
-function useStickyFeatureIndex(stepCount) {
+function useDesktopSticky() {
+  const [enabled, setEnabled] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return (
+      window.matchMedia('(min-width: 900px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+  })
+
+  useEffect(() => {
+    const mqWide = window.matchMedia('(min-width: 900px)')
+    const mqMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    const sync = () => setEnabled(mqWide.matches && !mqMotion.matches)
+    sync()
+
+    mqWide.addEventListener('change', sync)
+    mqMotion.addEventListener('change', sync)
+    return () => {
+      mqWide.removeEventListener('change', sync)
+      mqMotion.removeEventListener('change', sync)
+    }
+  }, [])
+
+  return enabled
+}
+
+function useActiveStep(enabled, count) {
   const [active, setActive] = useState(0)
   const stepRefs = useRef([])
 
   useEffect(() => {
+    if (!enabled) return undefined
+
     const nodes = stepRefs.current.filter(Boolean)
     if (!nodes.length) return undefined
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) return undefined
-
-    const ratios = new Array(stepCount).fill(0)
-
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          const index = Number(entry.target.getAttribute('data-step-index'))
-          if (Number.isNaN(index)) return
-          ratios[index] = entry.isIntersecting ? entry.intersectionRatio : 0
-        })
-        let best = 0
-        let bestRatio = -1
-        ratios.forEach((ratio, i) => {
-          if (ratio > bestRatio) {
-            bestRatio = ratio
-            best = i
-          }
-        })
-        setActive(best)
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+        if (visible[0]) {
+          const index = Number(visible[0].target.getAttribute('data-step-index'))
+          if (!Number.isNaN(index)) setActive(index)
+        }
       },
       {
-        threshold: [0.15, 0.35, 0.55, 0.75],
-        rootMargin: '-20% 0px -35% 0px',
+        threshold: [0.25, 0.5, 0.75],
+        rootMargin: '-25% 0px -35% 0px',
       },
     )
 
     nodes.forEach((node) => observer.observe(node))
     return () => observer.disconnect()
-  }, [stepCount])
+  }, [enabled, count])
 
   const setStepRef = (index) => (el) => {
     stepRefs.current[index] = el
@@ -79,7 +96,10 @@ function useStickyFeatureIndex(stepCount) {
 
   const scrollToStep = (index) => {
     setActive(index)
-    stepRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    const el = stepRefs.current[index]
+    if (!el) return
+    const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.28
+    window.scrollTo({ top, behavior: 'smooth' })
   }
 
   return { active, setStepRef, scrollToStep }
@@ -87,8 +107,9 @@ function useStickyFeatureIndex(stepCount) {
 
 export default function Features() {
   const { ref, className } = useReveal()
-  const { active, setStepRef, scrollToStep } = useStickyFeatureIndex(STEPS.length)
-  const activeStep = STEPS[active]
+  const sticky = useDesktopSticky()
+  const { active, setStepRef, scrollToStep } = useActiveStep(sticky, STEPS.length)
+  const activeShot = STEPS[active].shot
 
   return (
     <section id="features" className={`features-cinematic section-pad ${className}`} ref={ref}>
@@ -100,64 +121,72 @@ export default function Features() {
             <span className="text-orange"> One tracker.</span>
           </h2>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
-            Scroll the story — the screen keeps pace. Logging, recipes, meal planner, and
-            programming in one pass.
+            {sticky
+              ? 'Scroll the story — the screen keeps pace. Logging, recipes, meal planner, and programming in one pass.'
+              : 'Logging, recipes, meal planner, and programming — floor to kitchen in one tracker.'}
           </p>
         </div>
 
-        <div className="features-scroll">
-          <div className="features-scroll-phone">
-            <div className="features-phone-stage" aria-hidden="true">
-              <div className="feature-band-orbit" />
-              {STEPS.map((step, i) => (
-                <div
-                  key={step.key}
-                  className={`features-phone-layer ${i === active ? 'is-active' : ''}`}
-                >
-                  <PhoneFrame shot={step.shot} size="lg" />
+        {sticky ? (
+          <div className="features-scroll">
+            <div className="features-scroll-phone">
+              <div className="features-scroll-phone-sticky">
+                <div className="features-phone-card">
+                  <div className="feature-band-orbit" aria-hidden="true" />
+                  <PhoneFrame shot={activeShot} size="lg" className="features-phone-swap" />
                 </div>
-              ))}
+                <div className="features-scroll-dots" role="tablist" aria-label="Feature steps">
+                  {STEPS.map((step, i) => (
+                    <button
+                      key={step.key}
+                      type="button"
+                      role="tab"
+                      aria-selected={i === active}
+                      className={`features-scroll-dot ${i === active ? 'is-active' : ''}`}
+                      onClick={() => scrollToStep(i)}
+                      title={step.shot.label}
+                    >
+                      <span>{String(i + 1).padStart(2, '0')}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <div className="features-scroll-dots" role="tablist" aria-label="Feature steps">
+            <div className="features-scroll-copy">
+              <p className="sr-only" aria-live="polite">
+                {STEPS[active].eyebrow}: {STEPS[active].title}
+              </p>
               {STEPS.map((step, i) => (
-                <button
+                <article
                   key={step.key}
-                  type="button"
-                  role="tab"
-                  aria-selected={i === active}
-                  className={`features-scroll-dot ${i === active ? 'is-active' : ''}`}
-                  onClick={() => scrollToStep(i)}
-                  title={step.shot.label}
+                  ref={setStepRef(i)}
+                  data-step-index={i}
+                  className={`features-step ${i === active ? 'is-active' : ''}`}
                 >
-                  <span>{String(i + 1).padStart(2, '0')}</span>
-                </button>
+                  <p className="section-label">{step.eyebrow}</p>
+                  <h3 className="feature-band-title">{step.title}</h3>
+                  <p className="feature-band-body">{step.body}</p>
+                </article>
               ))}
             </div>
           </div>
-
-          <div className="features-scroll-copy">
-            <p className="sr-only" aria-live="polite">
-              {activeStep.eyebrow}: {activeStep.title}
-            </p>
-
-            {STEPS.map((step, i) => (
-              <article
-                key={step.key}
-                ref={setStepRef(i)}
-                data-step-index={i}
-                className={`features-step ${i === active ? 'is-active' : ''}`}
-              >
-                <div className="features-step-mobile-phone">
+        ) : (
+          <div className="features-stack">
+            {STEPS.map((step) => (
+              <article key={step.key} className="features-stack-item">
+                <div className="features-stack-phone">
                   <PhoneFrame shot={step.shot} size="md" />
                 </div>
-                <p className="section-label">{step.eyebrow}</p>
-                <h3 className="feature-band-title">{step.title}</h3>
-                <p className="feature-band-body">{step.body}</p>
+                <div>
+                  <p className="section-label">{step.eyebrow}</p>
+                  <h3 className="feature-band-title">{step.title}</h3>
+                  <p className="feature-band-body">{step.body}</p>
+                </div>
               </article>
             ))}
           </div>
-        </div>
+        )}
 
         <div className="feature-aside reveal-up mt-16 sm:mt-24">
           <div className="feature-aside-phones">
