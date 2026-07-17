@@ -753,6 +753,36 @@ h1, h2, h3 {
 }
 
 /* ── Feature sticky scroll ── */
+.features-cinematic {
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border);
+}
+
+.features-intro {
+  /* section-stage + clip — same watermark containing block as Product */
+}
+
+.features-intro-inner {
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+}
+@media (min-width: 640px) {
+  .features-intro-inner {
+    padding-top: 6.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+.features-body {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+@media (min-width: 640px) {
+  .features-body {
+    padding-top: 2.5rem;
+    padding-bottom: 6.5rem;
+  }
+}
 
 .features-scroll {
   display: grid;
@@ -839,7 +869,6 @@ h1, h2, h3 {
 .features-head {
   position: relative;
   z-index: 1;
-  margin-bottom: 2rem;
 }
 
 .features-stack {

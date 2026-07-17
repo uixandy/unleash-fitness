@@ -113,23 +113,26 @@ export default function Features() {
   const activeShot = STEPS[active].shot
 
   return (
-    <section id="features" className={`features-cinematic section-stage section-pad ${className}`} ref={ref}>
-      <SectionWatermark>FEATURES</SectionWatermark>
-
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
-        <div className="reveal-up features-head">
-          <p className="section-label">Features</p>
-          <h2 className="display-title max-w-3xl">
-            Floor to kitchen.
-            <span className="text-orange"> One tracker.</span>
-          </h2>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
-            {sticky
-              ? 'Scroll the story — the screen keeps pace. Logging, recipes, meal planner, and programming in one pass.'
-              : 'Logging, recipes, meal planner, and programming — floor to kitchen in one tracker.'}
-          </p>
+    <section id="features" className={`features-cinematic ${className}`} ref={ref}>
+      <div className="features-intro section-stage section-stage--clip">
+        <SectionWatermark>FEATURES</SectionWatermark>
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 relative z-10 features-intro-inner">
+          <div className="reveal-up features-head">
+            <p className="section-label">Features</p>
+            <h2 className="display-title max-w-3xl">
+              Floor to kitchen.
+              <span className="text-orange"> One tracker.</span>
+            </h2>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+              {sticky
+                ? 'Scroll the story — the screen keeps pace. Logging, recipes, meal planner, and programming in one pass.'
+                : 'Logging, recipes, meal planner, and programming — floor to kitchen in one tracker.'}
+            </p>
+          </div>
         </div>
+      </div>
 
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 features-body">
         {sticky ? (
           <div className="features-scroll">
             <div className="features-scroll-phone">
