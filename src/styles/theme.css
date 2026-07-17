@@ -593,7 +593,7 @@ h1, h2, h3 {
 .hero-cta-panel {
   margin-top: 2rem;
   padding: 1.25rem;
-  max-width: 28rem;
+  max-width: 32rem;
   border-radius: 16px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -1333,11 +1333,12 @@ h1, h2, h3 {
 }
 @media (min-width: 640px) {
   .waitlist-form {
-    grid-template-columns: minmax(9.5rem, 1fr) minmax(12.5rem, 1.35fr) auto;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
     align-items: stretch;
   }
   .waitlist-form .btn-primary {
-    min-width: 148px;
+    grid-column: 1 / -1;
+    width: 100%;
   }
 }
 .waitlist-form--compact {
