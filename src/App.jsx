@@ -2,7 +2,6 @@ import Hero from './components/Hero'
 import ProductProof from './components/ProductProof'
 import Features from './components/Features'
 import ProTeaser from './components/ProTeaser'
-import ClosingBand from './components/ClosingBand'
 import Footer from './components/Footer'
 import { useTheme } from './hooks/useTheme'
 
@@ -39,7 +38,6 @@ export default function App() {
       <ProductProof />
       <Features />
       <ProTeaser />
-      <ClosingBand />
       <Footer theme={theme} onSetTheme={setTheme} resolvedTheme={resolvedTheme} />
     </>
   )
