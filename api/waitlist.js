@@ -1,6 +1,6 @@
 /**
  * POST /api/waitlist
- * Body: { email: string, source?: string }
+ * Body: { email: string, first_name?: string, source?: string }
  *
  * Env (Vercel): SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
  */
@@ -13,6 +13,11 @@ function json(res, status, body) {
 
 function isValidEmail(email) {
   return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 320
+}
+
+function normalizeFirstName(value) {
+  if (typeof value !== 'string') return ''
+  return value.trim().replace(/\s+/g, ' ').slice(0, 80)
 }
 
 export default async function handler(req, res) {
@@ -45,7 +50,12 @@ export default async function handler(req, res) {
   }
 
   const email = String(body?.email || '').trim().toLowerCase()
+  const first_name = normalizeFirstName(body?.first_name)
   const source = String(body?.source || 'marketing').slice(0, 64)
+
+  if (!first_name) {
+    return json(res, 400, { error: 'First name required' })
+  }
 
   if (!isValidEmail(email)) {
     return json(res, 400, { error: 'Invalid email' })
@@ -59,7 +69,7 @@ export default async function handler(req, res) {
       'Content-Type': 'application/json',
       Prefer: 'return=minimal',
     },
-    body: JSON.stringify({ email, source }),
+    body: JSON.stringify({ email, first_name, source }),
   })
 
   if (insertRes.status === 409 || insertRes.status === 23505) {

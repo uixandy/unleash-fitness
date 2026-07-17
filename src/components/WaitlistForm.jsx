@@ -2,13 +2,25 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 export default function WaitlistForm({ id = 'waitlist', compact = false }) {
+  const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | loading | success | error | duplicate
   const [message, setMessage] = useState('')
 
+  function resetIdle() {
+    if (status !== 'idle' && status !== 'loading') setStatus('idle')
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
+    const name = firstName.trim().replace(/\s+/g, ' ').slice(0, 80)
     const trimmed = email.trim().toLowerCase()
+
+    if (!name) {
+      setStatus('error')
+      setMessage('Enter your first name.')
+      return
+    }
     if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
       setStatus('error')
       setMessage('Enter a valid email.')
@@ -18,12 +30,14 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
     setStatus('loading')
     setMessage('')
 
+    const payload = { email: trimmed, first_name: name, source: 'marketing' }
+
     try {
       // Prefer serverless API when configured; fall back to anon insert (RLS INSERT-only)
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmed, source: 'marketing' }),
+        body: JSON.stringify(payload),
       })
 
       if (res.status !== 404 && res.headers.get('content-type')?.includes('application/json')) {
@@ -35,7 +49,8 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
         }
         if (res.ok) {
           setStatus('success')
-          setMessage("You're on the list. We'll be in touch.")
+          setMessage(`You're on the list, ${name}. We'll be in touch.`)
+          setFirstName('')
           setEmail('')
           return
         }
@@ -53,9 +68,7 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
         return
       }
 
-      const { error } = await supabase
-        .from('marketing_waitlist')
-        .insert({ email: trimmed, source: 'marketing' })
+      const { error } = await supabase.from('marketing_waitlist').insert(payload)
 
       if (error) {
         if (error.code === '23505' || /duplicate|unique/i.test(error.message)) {
@@ -69,7 +82,8 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
       }
 
       setStatus('success')
-      setMessage("You're on the list. We'll be in touch.")
+      setMessage(`You're on the list, ${name}. We'll be in touch.`)
+      setFirstName('')
       setEmail('')
     } catch {
       setStatus('error')
@@ -82,15 +96,34 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
       <form
         id={id}
         onSubmit={handleSubmit}
-        className={compact ? 'flex flex-col gap-3' : 'flex flex-col sm:flex-row gap-3'}
+        className={compact ? 'waitlist-form waitlist-form--compact' : 'waitlist-form'}
         noValidate
       >
+        <label className="sr-only" htmlFor={`${id}-first-name`}>
+          First name
+        </label>
+        <input
+          id={`${id}-first-name`}
+          className="input"
+          type="text"
+          name="first_name"
+          autoComplete="given-name"
+          placeholder="First name"
+          value={firstName}
+          onChange={(e) => {
+            setFirstName(e.target.value)
+            resetIdle()
+          }}
+          disabled={status === 'loading' || status === 'success'}
+          required
+          maxLength={80}
+        />
         <label className="sr-only" htmlFor={`${id}-email`}>
           Email
         </label>
         <input
           id={`${id}-email`}
-          className="input flex-1"
+          className="input"
           type="email"
           name="email"
           autoComplete="email"
@@ -98,14 +131,14 @@ export default function WaitlistForm({ id = 'waitlist', compact = false }) {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value)
-            if (status !== 'idle' && status !== 'loading') setStatus('idle')
+            resetIdle()
           }}
           disabled={status === 'loading' || status === 'success'}
           required
         />
         <button
           type="submit"
-          className="btn-primary whitespace-nowrap sm:min-w-[140px]"
+          className="btn-primary whitespace-nowrap"
           disabled={status === 'loading' || status === 'success'}
         >
           {status === 'loading' ? 'Joining…' : status === 'success' ? 'Joined' : 'Join waitlist'}
