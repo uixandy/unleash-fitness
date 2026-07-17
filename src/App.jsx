@@ -1,3 +1,4 @@
+import SiteNav from './components/SiteNav'
 import Hero from './components/Hero'
 import ProductProof from './components/ProductProof'
 import Features from './components/Features'
@@ -12,6 +13,7 @@ export default function App() {
   if (path === '/privacy') {
     return (
       <>
+        <SiteNav theme={theme} resolvedTheme={resolvedTheme} onSetTheme={setTheme} />
         <main className="max-w-2xl mx-auto px-5 py-16">
           <a href="/" className="btn-ghost text-sm mb-8 inline-flex">
             ← Back
@@ -27,18 +29,19 @@ export default function App() {
             Supabase Auth. This marketing site only collects waitlist emails you submit.
           </p>
         </main>
-        <Footer theme={theme} onSetTheme={setTheme} resolvedTheme={resolvedTheme} />
+        <Footer resolvedTheme={resolvedTheme} />
       </>
     )
   }
 
   return (
     <>
-      <Hero theme={theme} resolvedTheme={resolvedTheme} onSetTheme={setTheme} />
+      <SiteNav theme={theme} resolvedTheme={resolvedTheme} onSetTheme={setTheme} />
+      <Hero />
       <ProductProof />
       <Features />
       <ProTeaser />
-      <Footer theme={theme} onSetTheme={setTheme} resolvedTheme={resolvedTheme} />
+      <Footer resolvedTheme={resolvedTheme} />
     </>
   )
 }

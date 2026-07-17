@@ -1,6 +1,5 @@
 import WaitlistForm from './WaitlistForm'
 import PhoneFrame from './PhoneFrame'
-import ThemeToggle from './ThemeToggle'
 
 const HERO_PHONE = {
   key: 'workout',
@@ -8,7 +7,7 @@ const HERO_PHONE = {
   src: '/screenshots/workout.png',
 }
 
-export default function Hero({ theme, resolvedTheme, onSetTheme }) {
+export default function Hero() {
   return (
     <section className="hero cinematic-hero theme-locked-dark">
       <div className="hero-stage" aria-hidden="true">
@@ -17,38 +16,6 @@ export default function Hero({ theme, resolvedTheme, onSetTheme }) {
         <div className="hero-stage-glow" />
         <div className="hero-grain" />
       </div>
-
-      <header className="hero-top">
-        <a href="/" className="shrink-0" aria-label="UNLEASH home">
-          <img
-            src="/assets/unleash-workout-tracker-logo-dark.svg"
-            alt="UNLEASH Workout Tracker"
-            className="h-9 sm:h-11 w-auto"
-          />
-        </a>
-        <nav className="hidden md:flex items-center gap-1" aria-label="Page sections">
-          <a href="#product" className="btn-ghost text-sm">
-            Product
-          </a>
-          <a href="#features" className="btn-ghost text-sm">
-            Features
-          </a>
-          <a href="#pro" className="btn-ghost text-sm">
-            Pro
-          </a>
-        </nav>
-        <div className="hero-top-actions">
-          <ThemeToggle
-            theme={theme}
-            resolvedTheme={resolvedTheme}
-            onSetTheme={onSetTheme}
-            className="theme-toggle--compact"
-          />
-          <a href="#hero-waitlist" className="btn-outline text-sm shrink-0">
-            Join waitlist
-          </a>
-        </div>
-      </header>
 
       <div className="hero-body">
         <div className="hero-copy">
